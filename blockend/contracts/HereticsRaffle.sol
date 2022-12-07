@@ -28,9 +28,8 @@ contract HereticsRaffle is Ownable{
     event EnterRaffle(address player);
     event RaffleOpen();
 
-    constructor(/* TO DO */) {
-        s_isOpen = false;
-    }
+    /*constructor() {
+    }*/
 
     /**
      * @notice This function is used by the owner to add the players to the raffle.
