@@ -3,8 +3,6 @@ import React from "react";
 function BlackBackground() {
     return (
       <div style={{
-        backgroundColor: 'black',
-        display: 'flex',
         position: 'relative',
       }}>
         <div style={{
@@ -16,7 +14,9 @@ function BlackBackground() {
           transform: 'translate(-50%, -50%)',
         }}>
           <div style={{
-            ::before: {
+            position: 'relative',
+          }}>
+            <div style={{
               content: '',
               borderTop: '50px solid transparent',
               borderBottom: '50px solid transparent',
@@ -24,8 +24,8 @@ function BlackBackground() {
               position: 'absolute',
               top: '-50px',
               left: '0',
-            },
-            ::after: {
+            }}></div>
+            <div style={{
               content: '',
               borderTop: '50px solid transparent',
               borderBottom: '50px solid transparent',
@@ -33,11 +33,10 @@ function BlackBackground() {
               position: 'absolute',
               top: '-50px',
               right: '0',
-            },
-          }}>
+            }}></div>
           </div>
         </div>
-      </div>
+      </div>      
     );
   }
   

@@ -36,3 +36,24 @@
   footer p {
     color: #ccc;
   }
+
+  .navbar {
+    background-color: black;
+  }
+
+  .logo {
+    height: 32px;
+    width: 32px;
+    margin-right: 16px;
+  }
+  
+  .time-counter {
+    color: white;
+    font-size: 24px;
+    float: right;
+  }
+  
+  h1 {
+    color: white;
+    margin: 0;
+  }

@@ -1,13 +1,18 @@
 import React, {useState} from "react";
-import Header from "./Header";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Background from "./Background";
+import TakeAddress from "./TakeAddress";
 
-const BlackBackground = () => {
+const App = () => {
     return (
-        <div className="shape-container">
-         <img src="my-image.jpg" alt="My Image" />
-        </div>
+        <>
+            <Background />
+            <Navbar />
+            <TakeAddress />
+            <Footer />
+        </>
     ); 
   };
   
-  export default BlackBackground;
+  export default App;
