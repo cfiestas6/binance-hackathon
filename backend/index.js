@@ -2,6 +2,7 @@ var res = document.location.hash
 var res1 = res.slice(14,44)
 var client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
 var res = `Bearer ${res1}`
+
 //console.log(res)
 //document.getElementById("demo").innerHTML = res
 
@@ -45,6 +46,7 @@ function getId(nombre) {
 
 function parseId(data)
 {
+    //console.log(data)
 	var id_person = JSON.parse(data)
 	get_if_in(id_person.data[0].id)
 }
@@ -79,15 +81,15 @@ function checkSub(id, follow)
     .then((data) => 
     {
         if (status_res !== 200)
-            checkData(follow, 0) 
+            checkData(follow, 0, id) 
         else
-            checkData(follow, JSON.stringify(data))
+            checkData(follow, JSON.stringify(data), id)
               
     })
 
 }
 
-function checkData(follow, sub)
+function checkData(follow, sub, id)
 {
     var follow = JSON.parse(follow)
     if (follow.total == 0)
@@ -106,5 +108,7 @@ function checkData(follow, sub)
         return;
     }
 	if (follow.total > 0 && sub.data != 0)
+    {
         document.getElementById("follow").innerHTML = "Enhorabuena estas dentro!";
+    }
 }
