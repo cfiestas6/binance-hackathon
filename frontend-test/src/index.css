@@ -149,6 +149,16 @@ form {
   cursor: pointer;
 }
 
+.twich-button:hover {background-color: #640960}
+
+.twich-button:active {
+  background-color: #540957;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
 
 .submit-button {
   display: block;
@@ -160,6 +170,14 @@ form {
   cursor: pointer;
   margin-top: 30px;
   
+}
+
+.submit-button:hover {background-color: #3e8e41}
+
+.submit-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .texto {
