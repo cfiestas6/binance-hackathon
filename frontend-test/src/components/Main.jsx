@@ -123,7 +123,7 @@ function Main() {
     <main>
       
 
-      <h2>Nuestra rifa de premios para nuestros seguidores más fieles</h2>
+      <h2 class="h2-title">Nuestra rifa de premios para nuestros seguidores más fieles</h2>
       <h3>Impulsado en colaboracion con Binance y Beep Bop Beep</h3>
       <p style={{marginBottom: '9px', marginTop: '20px'}}>Para entrar al sorteo deberás:</p>
       <p style={{marginBottom: '9px', marginTop: '20px'}}>· Seguir y ser subscriptor de Team Heretics en Twich</p>
