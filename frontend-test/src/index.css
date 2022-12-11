@@ -232,12 +232,13 @@ h2, h3, p {
 
 /* CSS */
 .twich-button {
+  color: rgb(155, 129, 163);
   font-size: 16px;
   font-weight: 200;
   letter-spacing: 1px;
   padding: 13px 20px 13px;
   outline: 0;
-  border: 1px solid rgb(199, 162, 211);
+  border: 2px solid rgb(29, 1, 29);
   cursor: pointer;
   position: relative;
   background-color: rgba(0, 0, 0, 0);
@@ -248,7 +249,7 @@ h2, h3, p {
 
 .twich-button:after {
   content: "";
-  background-color: #ee0dbd;
+  background-color: #ff00c8;
   width: 100%;
   z-index: -1;
   position: absolute;
