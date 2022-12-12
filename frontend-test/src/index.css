@@ -14,6 +14,7 @@ code {
 
 .navbar {
   display: flex;
+  border-bottom: 1px solid #DAA520;
   background-color: rgba(255, 255, 255, 0.826);
   padding-bottom: 15px;
   padding-left: 10px;
@@ -21,7 +22,15 @@ code {
   
   padding-left: 50px;
   text-align: center;
+  animation: glow 4s ease-in-out infinite 8s;
 }
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 0px #DAA520;
+  }
+}
+
 .follow {
   color: #1b1b32;
 }
@@ -69,12 +78,8 @@ body::before {
   width: 100%;
   z-index: -1;
   background: var(--color-darkblue);
-  background-image: linear-gradient(
-      115deg,
-      rgba(58, 58, 158, 0.8),
-      rgba(136, 136, 206, 0.7)
-    ),
-    url(https://imgs.search.brave.com/AfISps1BywxbSZJSL0kagFV57Ll_zDoAKyr1PXGdVuY/rs:fit:747:420:1/g:ce/aHR0cHM6Ly90OWg3/bjNpNS5zdGFja3Bh/dGhjZG4uY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIwLzA4/L0hlcmV0aWNzLTc0/N3g0MjAuanBn);
+  background-image:
+  url('../public/2022072808523412758\(3\).png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -135,10 +140,6 @@ form {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-
-
-
-
 .twich-button {
   display: block;
   width: 100%;
@@ -161,7 +162,6 @@ form {
   
 }
 
-
 .texto {
   width: 100%;
   padding-left: 35%;
@@ -183,10 +183,10 @@ h2, h3, p {
   
 }
 
-
 .main-title {
-  position: absolute;
-  width: 80%;
+  position: relative;
+  width: 100%;
+  height: 60%;
   font-size: 30px;
   font-weight: 600;
   color: transparent;
@@ -202,7 +202,6 @@ h2, h3, p {
     background-position: 200%;
   }
 }
-
 
 /* CSS */
 .submit-button {

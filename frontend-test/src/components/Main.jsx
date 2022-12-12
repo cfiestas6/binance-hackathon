@@ -121,15 +121,11 @@ function Main() {
   }
   return (
     <main>
-      
-
       <h2 class="h2-title">Nuestra rifa de premios para nuestros seguidores más fieles</h2>
-      <h3>Impulsado en colaboracion con Binance y Beep Bop Beep</h3>
-      <p style={{marginBottom: '9px', marginTop: '20px'}}>Para entrar al sorteo deberás:</p>
-      <p style={{marginBottom: '9px', marginTop: '20px'}}>· Seguir y ser subscriptor de Team Heretics en Twich</p>
-      <p style={{marginBottom: '9px', marginTop: '20px'}}>· Añadir la dirección de tu wallet en el formulario</p>
-
-    
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     <div class="texto">
     <form id="survey-form">
         <div class="form-group">
