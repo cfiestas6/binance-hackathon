@@ -36,7 +36,15 @@ code {
 }
 
 .logo {
-  margin-left: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-items: center;
+}
+
+.logo-heretics {
+  align-items: center;
+  border-left: 0;
+  margin-left: 0;
 }
 
 .images {
@@ -231,40 +239,63 @@ h2, h3, p {
 
 /* CSS */
 .twich-button {
-  color: rgb(155, 129, 163);
-  font-size: 16px;
-  font-weight: 200;
-  letter-spacing: 1px;
-  padding: 13px 20px 13px;
-  outline: 0;
-  border: 2px solid rgb(29, 1, 29);
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
   cursor: pointer;
   position: relative;
-  background-color: rgba(0, 0, 0, 0);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.twich-button:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.twich-button:active {
+  color: #000
+}
+
+.twich-button:active:after {
+  background: transparent;
+}
+
+.twich-button:hover:before {
+  opacity: 1;
 }
 
 .twich-button:after {
-  content: "";
-  background-color: #ff00c8;
-  width: 100%;
   z-index: -1;
+  content: '';
   position: absolute;
+  width: 100%;
   height: 100%;
-  top: 7px;
-  left: 7px;
-  transition: 0.2s;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
 }
 
-.twich-button:hover:after {
-  top: 0px;
-  left: 0px;
-}
-
-@media (min-width: 768px) {
-  .twich-button {
-    padding: 13px 50px 13px;
-  }
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }
