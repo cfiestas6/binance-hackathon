@@ -1,8 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../index.css';
 import img from "../assets/hereticsLogo.png";
 
-function Navbar() {
+
+function Navbar(day_cnt, hour_cnt, minutes_cnt, raffleIsOpened) {
+  const [time, setTime] = useState(null);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const day = day_cnt - now.getDay() -1;
+      const hours = hour_cnt - now.getHours() - 1;
+      const minutes = minutes_cnt - now.getMinutes() - 1;
+      const seconds = 60 - now.getSeconds();
+      raffleIsOpened = false;
+      setTime(`${day}:${hours}:${minutes}:${seconds}`);
+      if (raffleIsOpened == false) {
+        document.getElementById("state").innerHTML = `Cerrado`
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
     <nav class="navbar" style={{backgroundColor: '#000000',
@@ -25,8 +43,11 @@ function Navbar() {
           <img class="logo" style={{marginTop: '9px', marginLeft: '630px'}} src= {img} alt="File:Heretics logo.png" width="150" height="50"/>
         </a>
       </div>
-    </nav>
+      <div>
+      <span class="state" style={{ position: "relative", color: 'gold', fontSize: '36px', marginLeft: '400px', marginBottom: '50px'}}>Activo: {time}</span>
     </div>
+    </nav>
+    </div> // TODO: Turn enter button to red if user is registered, give info if they click another time with small text in red below
   );
 }
 

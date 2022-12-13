@@ -149,7 +149,7 @@ function Main() {
           </button>
         </div>
       </form>
-      <h1 id="follower">Hola</h1>
+      <h1 id="follower"></h1>
     </div>   
     </main>
   )
