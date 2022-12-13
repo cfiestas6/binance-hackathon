@@ -2,23 +2,33 @@ import React, {useState, useEffect} from 'react';
 import '../index.css';
 import img from "../assets/hereticsLogo.png";
 
-
 function Navbar(day_cnt, hour_cnt, minutes_cnt, raffleIsOpened) {
   const [time, setTime] = useState(null);
+
   useEffect(() => {
+    const day_cnt = 16;
+    const hour_cnt = 15;
+    const minutes_cnt = 30;
     const interval = setInterval(() => {
       const now = new Date();
-      const day = day_cnt - now.getDay() -1;
-      const hours = hour_cnt - now.getHours() - 1;
-      const minutes = minutes_cnt - now.getMinutes() - 1;
-      const seconds = 60 - now.getSeconds();
-      raffleIsOpened = false;
-      setTime(`${day}:${hours}:${minutes}:${seconds}`);
+      var days = day_cnt - now.getDay() - 1;
+      var hours = hour_cnt - now.getHours() - 1;
+      var minutes = minutes_cnt - now.getMinutes() - 1;
+      var seconds = 60 - now.getSeconds();
+      if (days < 0)
+        days = 0;
+      if (hours < 0)
+        hours += 24;
+      if (minutes < 0)
+        minutes += 60;
+      if (days >= now.getDay() && hours >= now.getHours() && minutes >= now.getMinutes && seconds == 0)
+        raffleIsOpened = false;
+      raffleIsOpened = true;
+      setTime(`${days}:${hours}:${minutes}:${seconds}`);
       if (raffleIsOpened == false) {
-        document.getElementById("state").innerHTML = `Cerrado`
+        document.getElementById("state").innerHTML = "Cerrado";
       }
     }, 1000);
-    return () => clearInterval(interval);
   }, []);
 
   return (
