@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import getName from '../pages/api/api'
 
 export default function Home() {
   return (
@@ -11,6 +12,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+<a id="twich" class="twich-button" href="https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=fm7mv8gwvzqqq2rjw07pvbaymox44l&redirect_uri=http://localhost:3000&scope=openid+user%3Aread%3Asubscriptions&state=c3ab8aa609ea11e793ae92361f002671">
+        Conectar con Twich
+          </a>
+          <button onClick={getName}>Entrar en el sorteo</button>
+          <h1 id="follower"></h1>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
