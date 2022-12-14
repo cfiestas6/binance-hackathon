@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+#link {
+  cursor: pointer;
+}
+
+#twich-label {
+  text-align: center;
+}
+
 .navbar {
   display: flex;
   border-bottom: 1px solid #DAA520;
@@ -29,6 +37,10 @@ code {
   0% {
     box-shadow: 0 0 0 0px #DAA520;
   }
+}
+
+#follower {
+  font-size: 22;
 }
 
 .follow {

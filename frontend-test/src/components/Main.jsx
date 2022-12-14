@@ -121,22 +121,24 @@ function Main() {
   }
   return (
     <main>
-      <h2 class="h2-title">Nuestra rifa de premios para nuestros seguidores más fieles</h2>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     <div class="texto">
     <form id="survey-form">
         <div class="form-group">
-        <label id="twich-label" for="twich">Para entrar al sorteo primero tienes que conectarte con Twich:</label>
+        <label id="twich-label" for="twich">Para poder entrar al sorteo:</label>
         <a id="twich" class="twich-button" href="https://id.twitch.tv/oauth2/authorize
 ?response_type=token+id_token
 &client_id=fm7mv8gwvzqqq2rjw07pvbaymox44l
 &redirect_uri=http://localhost:3000
 &scope=openid+user%3Aread%3Asubscriptions	
 &state=c3ab8aa609ea11e793ae92361f002671">
-        Conectar con Twich
+        Conecta con Twich
           </a>
         </div>
         <div class="form-group">
@@ -145,11 +147,11 @@ function Main() {
         </div>
         <div class="form-group">
           <button type="submit" id="submit" class="submit-button" onClick={getName()}>
-            Entrar al sorteo
+            Entra al sorteo
           </button>
         </div>
       </form>
-      <h1 id="follower"></h1>
+      <p id="follower" style={{color: "#daa520"}}></p>
     </div>   
     </main>
   )
