@@ -2,13 +2,16 @@ import React, {useState, useEffect} from 'react';
 import '../index.css';
 import img from "../assets/hereticsLogo.png";
 
-function Navbar(day_cnt, hour_cnt, minutes_cnt, raffleIsOpened) {
-  const [time, setTime] = useState(null);
 
+function Navbar(props) {
+
+  const [time, setTime] = useState(null);
+  
   useEffect(() => {
-    const day_cnt = 3;
-    const hour_cnt = 11;
-    const minutes_cnt = 43;
+    const day_cnt = props.day_cnt;
+    const hour_cnt = props.hour_cnt;
+    const minutes_cnt = props.minutes_cnt;
+    const raffleIsOpened = props.raffleIsOpened; // TO-DO
     const interval = setInterval(() => {
       const now = new Date();
       var days = day_cnt - now.getDay() - 1;
@@ -21,8 +24,6 @@ function Navbar(day_cnt, hour_cnt, minutes_cnt, raffleIsOpened) {
         hours += 24;
       if (minutes < 0)
         minutes += 60;
-      raffleIsOpened = true; // remove when the backend already manages it
-      if (day_cnt >= now.getDay() && hour_cnt >= now.getHours() && minutes_cnt >= now.getMinutes && seconds == 1)
         raffleIsOpened = false;
       if(days.toString().length < 2)
         days= "0" + days;
@@ -33,7 +34,7 @@ function Navbar(day_cnt, hour_cnt, minutes_cnt, raffleIsOpened) {
       if (seconds.toString().length < 2)
         seconds = "0" + seconds;
       setTime(`${days}:${hours}:${minutes}:${seconds}`);
-      if (raffleIsOpened == false) {
+      if ((day_cnt >= now.getDay() && hour_cnt >= now.getHours() && minutes_cnt >= now.getMinutes && seconds == 1) || raffleIsOpened == false) {
         document.getElementById("state").innerHTML = "Cerrado";
       }
     }, 1000);

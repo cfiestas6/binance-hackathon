@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Menu_Owner} from 'react';
 import '../index.css';
 import createUser from '../scripts/db';
 
@@ -152,7 +152,7 @@ function Main() {
         </div>
       </form>
       <p id="follower" style={{color: "#daa520"}}></p>
-    </div>   
+    </div>
     </main>
   )
 }
