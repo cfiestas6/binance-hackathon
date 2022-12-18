@@ -133,7 +133,8 @@ function Main() {
       <br />
       <br />
     <div class="texto">
-    <form id="survey-form">
+      <div class='div-form'>
+      <form id="survey-form">
         <div class="form-group">
         <label id="twich-label" for="twich">Para poder entrar al sorteo:</label>
         <a id="twich" class="twich-button" href="https://id.twitch.tv/oauth2/authorize
@@ -153,8 +154,9 @@ function Main() {
           <button type="submit" id="submit" class="submit-button" onClick={getName()}>
             Entra al sorteo
           </button>
+          </div>
+        </form>
         </div>
-      </form>
       <p id="follower" style={{color: "#daa520"}}></p>
     </div>
     </main>

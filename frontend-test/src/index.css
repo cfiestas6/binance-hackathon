@@ -130,6 +130,10 @@ button {
 
 /* form */
 
+#survey-form {
+  width: 100%;
+}
+
 form {
   background: var(--color-darkblue-alpha);
   padding: 2.5rem 0.625rem;
@@ -310,4 +314,53 @@ h2, h3, p {
   0% { background-position: 0 0; }
   50% { background-position: 400% 0; }
   100% { background-position: 0 0; }
+}
+
+/*
+.div-form {
+  border-style: solid;
+  border-width: 10px;
+  border-color: #00ffd5;
+}
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.div-form {
+  margin: auto;
+  width: 30vw;
+  height: 40vh;
+  /*outline: 1px solid red;*/
+  border: 5px solid transparent;
+  border-radius: 2%;
+  box-sizing: border-box;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.div-form {
+  background-image:
+    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)),
+    linear-gradient(180deg, rgb(214, 195, 22), rgb(250, 250, 250) 50%,rgb(0, 0, 0));
+
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 200%;
+  background-position: 0 0, 0 100%;
+  background-origin: padding-box, border-box;
+  animation: highlight 1s infinite alternate;
+}
+
+@keyframes highlight {
+  100% {
+    background-position: 0 0, 0 0;
+  }
 }
