@@ -22,22 +22,24 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
     using Address for address;
 
     mapping (address => bool) isPlayer;
+    mapping (address => bool) isAlreadyWinner;
 
     /* State Variables */
-    address payable[] private s_players;
-    bool s_isOpen;
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
-    bytes32 private immutable i_gasLane;
+    address payable[] private s_players;
+    address[] public s_winners; // Array of winners
+    bool s_isOpen;
     uint64 private immutable i_subscriptionId;
-    uint16 private constant REQUEST_CONFIRMATIONS = 3;
     uint32 private immutable i_callbackGasLimit;
-    uint32 private constant NUM_WORDS = 1;
-    address payable s_recentWinner; // Only used to print the recent winner on the frontend (OPTIONAL)
+    bytes32 private immutable i_gasLane;
+    uint32 private s_numWords;
+    uint16 private constant REQUEST_CONFIRMATIONS = 3;
 
     /* Events */
     event EnterRaffle(address player);
     event RaffleOpen();
     event GetWinner(uint256 indexed requestId);
+    event WinnersSelected(address[] winners);
 
     /* Modifiers */
     modifier onlyOpen {
@@ -60,8 +62,9 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         i_callbackGasLimit = callbackGasLimit;
     }
 
-    function openRaffle() external onlyOwner {
+    function openRaffle(uint32 numWords) external onlyOwner {
         s_isOpen = true;
+        s_numWords = numWords;
         emit RaffleOpen();
     }
 
@@ -74,12 +77,9 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         onlyOwner 
         onlyOpen
     {
-        if (player.isContract()) {              // Check if the address entered is a contract
+        if (player.isContract()) {               // Check if the address entered is a contract
             revert HereticsRaffle__NotWallet(player);
         }
-        /*if (isPlayer[player]) {                 // Check that the address isn't already a player
-            revert HereticsRaffle__AlreadyIn();
-        }*/
         s_players.push(payable(player));
         emit EnterRaffle(player);               // Emit event when a player is added to the s_players array
     }
@@ -94,18 +94,31 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         i_subscriptionId,
         REQUEST_CONFIRMATIONS,
         i_callbackGasLimit,
-        NUM_WORDS
+        s_numWords
        );
        emit GetWinner(requestId);
     }
-
+    /**
+     * @notice This function overrides chainlink's function.
+     *         This function gets the winners using chainlink's random numbers.
+     *         Finally it emits an event with the array of winners.
+     */
     function fulfillRandomWords(
         uint256, // requestId
         uint256[] memory randomWords
     ) internal override {
-        uint256 indexOfWinner = randomWords[0] % s_players.length; // 
-        address payable winner = s_players[indexOfWinner]; 
-        s_recentWinner = winner; // Only to display the winner
-        /* Give access to the reward NFT */
+
+        for (uint i = 0; i < s_numWords; i++) {
+            uint256 indexOfWinner = randomWords[i] % s_players.length;
+            address newWinner = s_players[indexOfWinner];
+            if (isAlreadyWinner[newWinner]) {
+                indexOfWinner > 0 ? indexOfWinner -= 1 : indexOfWinner += 1; 
+                newWinner = s_players[indexOfWinner];
+            }
+            isAlreadyWinner[newWinner] = true;
+            s_winners.push(newWinner);
+        }
+        /* Emit event from contract to whitelist the address from backend */
+        emit WinnersSelected(s_winners);
     }
 }
