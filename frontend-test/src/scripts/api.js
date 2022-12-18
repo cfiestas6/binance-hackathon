@@ -1,10 +1,6 @@
-var res = document.location.hash
-var res1 = res.slice(14,44)
-var client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
-var res = `Bearer ${res1}`
-
 //console.log(res)
 //document.getElementById("demo").innerHTML = res
+var client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
 
 function getName()
 {
@@ -22,7 +18,7 @@ function getName()
     .then((data) =>
 	{
         var name_person = JSON.parse(JSON.stringify(data))
-        getId(name_person.preferred_username)
+        getId(name_person.preferred_username, res)
 	})
 }
 
@@ -94,21 +90,21 @@ function checkData(follow, sub, id)
     var follow = JSON.parse(follow)
     if (follow.total == 0)
     {
-            if (sub == 0)
-            {
-		        document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch ni eres subcriptor!";
-                return;
-            }
             document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch!";
             return;
     }
     if (sub == 0)
     {
-        document.getElementById("follower").innerHTML = "No eres subcriptor de Team Heretics en Twitch!";
+        // Enviar al smart contract solo una vez el address
+        document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
+        //createUser(id,"0x388a244FC351e4C77F778F1B63CdB8f200616434")
         return;
     }
 	if (follow.total > 0 && sub.data != 0)
     {
+        // Enviar al smart contract dos veces al ser sub
         document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
+        //createUser(id,"0x388a244FC351e4C77F778F1B63CdB8f200616434")
+        return;
     }
 }

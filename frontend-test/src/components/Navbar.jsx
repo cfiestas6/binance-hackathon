@@ -8,12 +8,12 @@ function Navbar(props) {
   const [time, setTime] = useState(null);
   
   useEffect(() => {
-    const day_cnt = props.day_cnt;
-    const hour_cnt = props.hour_cnt;
-    const minutes_cnt = props.minutes_cnt;
-    const raffleIsOpened = props.raffleIsOpened; // TO-DO
-    const interval = setInterval(() => {
-      const now = new Date();
+    var day_cnt = props.day_cnt;
+    var hour_cnt = props.hour_cnt;
+    var minutes_cnt = props.minutes_cnt;
+    var raffleIsOpened = props.raffleIsOpened; // TO-DO
+    var interval = setInterval(() => {
+      var now = new Date();
       var days = day_cnt - now.getDay() - 1;
       var hours = hour_cnt - now.getHours() - 1;
       var minutes = minutes_cnt - now.getMinutes() - 1;

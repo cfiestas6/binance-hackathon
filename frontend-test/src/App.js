@@ -7,9 +7,8 @@ import Menu from './components/Burger-menu';
 import Menu_Owner from './components/Burger-menu-owner';
 
 function App() {
-  return (
+    return (
     <div className="App">
-      <Menu_Owner />
       <Main />
       <Menu />
       <Footer />

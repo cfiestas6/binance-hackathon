@@ -1,7 +1,9 @@
-import React, {Menu_Owner} from 'react';
+import { id } from 'ethers/lib/utils';
+import React from 'react';
+import Menu_Owner from './Burger-menu-owner';
 import '../index.css';
 import createUser from '../scripts/db';
-
+import App from '../App';
 
 function Main() {
   var res = document.location.hash
@@ -51,14 +53,16 @@ function Main() {
   
   function parseId(data)
   {
-      //console.log(data)
+    //console.log(data)
     var id_person = JSON.parse(data)
-    get_if_in(id_person.data[0].id)
+    if (id_person.data[0].id == 855203396)
+      return <Menu_Owner isOwner={true}/>
+    else
+      get_if_in(id_person.data[0].id)
   }
   
   function get_if_in(id) {
     let url = `https://api.twitch.tv/helix/users/follows?from_id=${id}&to_id=500012077`
-  
       let headers = {
     "Authorization": res,
       "Client-Id": client_id,
@@ -95,30 +99,30 @@ function Main() {
   }
   
   function checkData(follow, sub, id)
-  {
-      var follow = JSON.parse(follow)
-      if (follow.total == 0)
-      {
-              if (sub == 0)
-              {
-              document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch ni eres subcriptor!";
-                  return;
-              }
-              document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch!";
-              return;
-      }
-      if (sub == 0)
-      {
-          document.getElementById("follower").innerHTML = "No eres subcriptor de Team Heretics en Twitch!";
-          return;
-      }
-    if (follow.total > 0 && sub.data != 0)
-      {
-          document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
-          const hash = document.getElementById("hash")
-          createUser(id, hash)
-      }
-  }
+{
+    var follow = JSON.parse(follow)
+    if (follow.total == 0)
+    {
+            document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch!";
+            return;
+    }
+    if (sub == 0)
+    {
+        // Enviar al smart contract solo una vez el address
+        document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
+        //const hash = document.getElementById("hash")
+        //createUser(id, hash)
+        return;
+    }
+	if (follow.total > 0 && sub.data != 0)
+    {
+        // Enviar al smart contract dos veces al ser sub
+        document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
+        //const hash = document.getElementById("hash")
+        //createUser(id, hash)
+        return;
+    }
+}
   return (
     <main>
       <br />

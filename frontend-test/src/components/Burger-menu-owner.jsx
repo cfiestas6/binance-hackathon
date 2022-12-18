@@ -2,15 +2,21 @@ import React, {useState, Component} from 'react';
 import {Contract, providers, Wallet} from 'ethers';
 import Navbar from './Navbar';
 
-function Menu_Owner(isOwner) {
+function test(isOwner){
+  Menu_Owner(isOwner)
+}
+
+function Menu_Owner(props) {
+  /*var flag = 0;
+  if (props.isOwner == true)
+    flag = 1;
+  console.log(props.isOwner)*/
   const [menuOpen, setMenuOpen] = useState(false);
   const [numOfWinners, setNumOfWinners] = useState('');
   const [endingDay, setEndingDay] = useState('');
   const [endingHour, setEndingHour] = useState('');
   const [endingMinute, setEndingMinute] = useState('');
   const [raffleIsOpened, setRaffleStatus] = useState('');
-
-  isOwner = true; // temporal
   async function sendTransaction() {
     const provider = new providers.Web3Provider(window.ethereum);
     const contractAddress = ""; //put contracty bytecode
@@ -18,16 +24,15 @@ function Menu_Owner(isOwner) {
 
     }];
     const contract = new Contract(contractAddress, contractAbi, provider.getSigner());
-
     const transactionParams = {
       method: 'transfer',
-      arguments: [/*constructor arguments*/], // we need further team talks
+    arguments: [/*constructor arguments*/], // we need further team talks
       gasLimit: 900000,
     };
-
     const transactionReceipt = await contract.executeTransaction(transactionParams);
   }
-  if (isOwner) {
+  //console.log(isOwner)
+  if (props.isOwner ) { 
     return (
       <div>
         <Navbar 
@@ -78,7 +83,7 @@ function Menu_Owner(isOwner) {
               <button type='submit' id='deploy' disabled={!numOfWinners || !endingDay || !endingHour || !endingMinute} onClick={() => {
                 sendTransaction();
                 setRaffleStatus(true);
-              }}>Launch Raffle</button>ç
+              }}>Launch Raffle</button>
             </form>
           </div>
         )}
@@ -86,7 +91,9 @@ function Menu_Owner(isOwner) {
       </div>
     );
   }
+  
 }
 
+//trial(true)
 
 export default Menu_Owner;
