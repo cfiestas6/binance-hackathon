@@ -1,13 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import '../index.css';
 import img from "../assets/hereticsLogo.png";
+import Menu_Owner/*, sendTransaction*/ from './Burger-menu-owner';
 
 
 function Navbar(props) {
 
   const [time, setTime] = useState(null);
-  console.log(props, "nav")
+  console.log(props, "nv");
   useEffect(() => {
+    console.log("veremos3")
+    if(typeof props.day_cnt === 'undefined') {
+      console.log("veremos2")
+      document.getElementById("state").innerHTML = "Cerrado";
+    } else {
+    console.log("veremos")
     var day_cnt = props.day_cnt;
     var hour_cnt = props.hour_cnt;
     var minutes_cnt = props.minutes_cnt;
@@ -35,17 +42,21 @@ function Navbar(props) {
       if (seconds.toString().length < 2)
         seconds = "0" + seconds;
       setTime(`${days}:${hours}:${minutes}:${seconds}`);
-      // console.log(day_cnt)
-      // console.log(now.getUTCDate())
-      // console.log(hour_cnt)
-      // console.log(now.getUTCHours())
-      // console.log(minutes_cnt)
-      // console.log(now.getUTCMinutes())
-      if ((day_cnt <= now.getUTCDate() && hour_cnt <= now.getUTCHours() +1 && minutes_cnt <= now.getUTCMinutes() && seconds === 1) || raffleIsOpened === false) {
+      console.log(day_cnt)
+      console.log(now.getUTCDate())
+      console.log(hour_cnt)
+      console.log(now.getUTCHours())
+      console.log(now.getUTCHours() + 1)
+      console.log(minutes_cnt)
+      console.log(now.getUTCMinutes())
+      console.log(raffleIsOpened)
+      if ((day_cnt <= now.getDate() && hour_cnt <= (now.getUTCHours() +1) && minutes_cnt <= now.getUTCMinutes() && seconds === 1) || raffleIsOpened == false) {
         document.getElementById("state").innerHTML = "Cerrado";
+        /*sendTransaction();*/
       }
     }, 1000);
-  }, []);
+  }
+}, [props.day_cnt, props.hour_cnt, props.minutes_cnt, props.raffleIsOpened]);
 
   const handleClick = () => {
     window.location.href = 'https://teamheretics.com/';

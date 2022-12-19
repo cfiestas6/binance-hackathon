@@ -13,20 +13,20 @@ function Menu_Owner(props) {
   const [endingHour, setEndingHour] = useState('');
   const [endingMinute, setEndingMinute] = useState('');
   const [raffleIsOpened, setRaffleStatus] = useState('');
-  async function sendTransaction() {
-    const provider = new providers.Web3Provider(window.ethereum);
-    const contractAddress = ""; //put contracty bytecode
-    const contractAbi = [{
-
-    }];
-    const contract = new Contract(contractAddress, contractAbi, provider.getSigner());
-    const transactionParams = {
-      method: 'transfer',
-    arguments: [/*constructor arguments*/], // we need further team talks
-      gasLimit: 900000,
-    };
-    const transactionReceipt = await contract.executeTransaction(transactionParams);
-  }
+  //async function sendTransaction() {
+  //  const provider = new providers.Web3Provider(window.ethereum);
+  //  const contractAddress = ""; //put contracty bytecode
+  //  const contractAbi = [{
+//
+  //  }];
+  //  const contract = new Contract(contractAddress, contractAbi, provider.getSigner());
+  //  const transactionParams = {
+  //    method: 'transfer',
+  //  arguments: [/*constructor arguments*/], // we need further team talks
+  //    gasLimit: 900000,
+  //  };
+  //  const transactionReceipt = await contract.executeTransaction(transactionParams);
+  //}
   console.log(props)
   if (props.isOwner ) { 
     return (
@@ -77,7 +77,6 @@ function Menu_Owner(props) {
             onChange={(e) => setEndingMinute(e.target.value)}
             />
             <button type='submit' id='deploy' disabled={!numOfWinners || !endingDay || !endingHour || !endingMinute} onClick={() => {
-              sendTransaction();
               setRaffleStatus(true);
             }}>Launch Raffle</button>
           </div>
@@ -91,4 +90,4 @@ function Menu_Owner(props) {
 
 //trial(true)
 
-export default Menu_Owner;
+export default Menu_Owner/*, sendTransaction*/;

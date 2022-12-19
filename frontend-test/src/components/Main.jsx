@@ -159,7 +159,8 @@ function Main() {
       {showMenu ?
         <Menu_Owner isOwner={true} mn="tst"/>
         :
-        <Navbar/>
+        <Navbar
+        />
       }
       <br />
       <br />
