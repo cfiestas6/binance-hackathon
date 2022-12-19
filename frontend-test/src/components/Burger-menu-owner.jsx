@@ -1,8 +1,8 @@
-import React, {useState, Component} from 'react';
-import {Contract, providers, Wallet} from 'ethers';
+import React, {useState} from 'react';
+import {Contract, providers} from 'ethers';
 import Navbar from './Navbar';
 
-function test(isOwner){
+function test(isOwner){ // no se usa
   Menu_Owner(isOwner)
 }
 
@@ -27,18 +27,19 @@ function Menu_Owner(props) {
     };
     const transactionReceipt = await contract.executeTransaction(transactionParams);
   }
-  //console.log(isOwner)
+  console.log(props)
   if (props.isOwner ) { 
     return (
       <div>
-        <Navbar 
+      <div>
+        <Navbar
         numOfWinners={numOfWinners} // passed to contract
-        endingHour={endingHour}
         day_cnt={endingDay}
         hour_cnt={endingHour}
         minutes_cnt={endingMinute}
         raffleIsOpened={raffleIsOpened}
         />
+      </div>
       <div
         style={{
           position: 'fixed',
@@ -64,23 +65,21 @@ function Menu_Owner(props) {
         </button>
         {menuOpen && (
           <div>
-            <form>
-              <input type='number' placeholder='NumOfWinners' value={numOfWinners} onChange={
-                (e) => setNumOfWinners(e.target.value)}/>
-              <input id='timeInput' type='number' placeholder='EndingDay' value={endingDay}
-              onChange={(e) => setEndingDay(e.target.value)}
-              />
-              <input id='timeInput' type='number' placeholder='EndingHour' value={endingHour}
-              onChange={(e) => setEndingHour(e.target.value)}
-              />
-              <input id='timeInput' type='number' placeholder='EndingMinute' value={endingMinute}
-              onChange={(e) => setEndingMinute(e.target.value)}
-              />
-              <button type='submit' id='deploy' disabled={!numOfWinners || !endingDay || !endingHour || !endingMinute} onClick={() => {
-                sendTransaction();
-                setRaffleStatus(true);
-              }}>Launch Raffle</button>
-            </form>
+            <input type='number' placeholder='NumOfWinners' value={numOfWinners} onChange={
+              (e) => setNumOfWinners(e.target.value)}/>
+            <input id='timeInput' type='number' placeholder='EndingDay' value={endingDay}
+            onChange={(e) => setEndingDay(e.target.value)}
+            />
+            <input id='timeInput' type='number' placeholder='EndingHour' value={endingHour}
+            onChange={(e) => setEndingHour(e.target.value)}
+            />
+            <input id='timeInput' type='number' placeholder='EndingMinute' value={endingMinute}
+            onChange={(e) => setEndingMinute(e.target.value)}
+            />
+            <button type='submit' id='deploy' disabled={!numOfWinners || !endingDay || !endingHour || !endingMinute} onClick={() => {
+              sendTransaction();
+              setRaffleStatus(true);
+            }}>Launch Raffle</button>
           </div>
         )}
       </div>

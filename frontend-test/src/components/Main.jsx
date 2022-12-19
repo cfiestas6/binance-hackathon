@@ -2,10 +2,12 @@ import { id } from 'ethers/lib/utils';
 import React from 'react';
 import Menu_Owner from './Burger-menu-owner';
 import '../index.css';
-import App from '../App';
+import Navbar from './Navbar';
+import { useState } from 'react';
 const client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
 
 function Main() {
+  const [showMenu, setMenu] = useState(false);
   //console.log(res)
   //document.getElementById("demo").innerHTML = res
   function getName()
@@ -51,12 +53,11 @@ function Main() {
   
   function parseId(data, res)
   {
-    //console.log(data)
     var id_person = JSON.parse(data)
-    if (id_person.data[0].id == 855203397)
-      return <Menu_Owner isOwner={true}/>
+    if (id_person.data[0].id === 855203397 || id_person.data[0].id === 149156587)
+      setMenu(true)
     else
-      get_if_in(id_person.data[0].id, res)
+     get_if_in(id_person.data[0].id, res)
   }
   
   function get_if_in(id, res) {
@@ -97,14 +98,14 @@ function Main() {
   }
   
   function checkData(follow, sub, id)
-{
+ {
     var follow = JSON.parse(follow)
-    if (follow.total == 0)
+    if (follow.total === 0)
     {
-            document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch!";
-            return;
+      document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch!";
+      return;
     }
-    if (sub == 0)
+    if (sub === 0)
     {
         // Enviar al smart contract solo una vez el address
         document.getElementById("follower").innerHTML = "¡Enhorabuena eres elegible para participar en el sorteo!";
@@ -123,7 +124,7 @@ function Main() {
         //console.log(hash)
         return;
     }
-	if (follow.total > 0 && sub.data != 0)
+	if (follow.total > 0 && sub.data !== 0)
     {
         // Enviar al smart contract dos veces al ser sub
         document.getElementById("follower").innerHTML = "¡Enhorabuena eres elegible para participar en el sorteo!";
@@ -144,6 +145,11 @@ function Main() {
 
   return (
     <main>
+      {showMenu ?
+        <Menu_Owner isOwner={true} mn="tst"/>
+        :
+        <Navbar/>
+      }
       <br />
       <br />
       <br />

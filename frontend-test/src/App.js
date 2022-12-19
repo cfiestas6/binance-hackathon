@@ -9,10 +9,8 @@ import Menu_Owner from './components/Burger-menu-owner';
 function App() {
     return (
     <div className="App">
-      <Navbar />
       <Main />
       <Menu />
-      <Menu_Owner />
       <Footer />
     </div>
   );

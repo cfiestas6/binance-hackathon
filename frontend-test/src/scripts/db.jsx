@@ -51,10 +51,10 @@ var res = document.location.hash
   {
     //console.log(data)
     var id_person = JSON.parse(data)
-    if (id_person.data[0].id == 855203397)
-      return <Menu_Owner isOwner={true}/>
-    else
-      get_if_in(id_person.data[0].id)
+    //if (id_person.data[0].id == 855203397)
+      // return <Menu_Owner isOwner={true}/>
+    //else
+      //get_if_in(id_person.data[0].id)
   }
   
   function get_if_in(id) {

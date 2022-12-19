@@ -6,17 +6,18 @@ import img from "../assets/hereticsLogo.png";
 function Navbar(props) {
 
   const [time, setTime] = useState(null);
-  
+  console.log(props, "nav")
   useEffect(() => {
     var day_cnt = props.day_cnt;
     var hour_cnt = props.hour_cnt;
     var minutes_cnt = props.minutes_cnt;
     var raffleIsOpened = props.raffleIsOpened; // TO-DO
+
     var interval = setInterval(() => {
       var now = new Date();
-      var days = day_cnt - now.getDay() - 1;
-      var hours = hour_cnt - now.getHours() - 1;
-      var minutes = minutes_cnt - now.getMinutes() - 1;
+      var days = day_cnt - now.getUTCDate() -1;
+      var hours = hour_cnt - now.getUTCHours(); // no -1 because Spain is UTC +1 hour
+      var minutes = minutes_cnt - now.getUTCMinutes() - 1;
       var seconds = 60 - now.getSeconds();
       if (days < 0)
         days = 0;
@@ -34,7 +35,13 @@ function Navbar(props) {
       if (seconds.toString().length < 2)
         seconds = "0" + seconds;
       setTime(`${days}:${hours}:${minutes}:${seconds}`);
-      if ((day_cnt >= now.getDay() && hour_cnt >= now.getHours() && minutes_cnt >= now.getMinutes && seconds == 1) || raffleIsOpened == false) {
+      // console.log(day_cnt)
+      // console.log(now.getUTCDate())
+      // console.log(hour_cnt)
+      // console.log(now.getUTCHours())
+      // console.log(minutes_cnt)
+      // console.log(now.getUTCMinutes())
+      if ((day_cnt <= now.getUTCDate() && hour_cnt <= now.getUTCHours() +1 && minutes_cnt <= now.getUTCMinutes() && seconds === 1) || raffleIsOpened === false) {
         document.getElementById("state").innerHTML = "Cerrado";
       }
     }, 1000);
@@ -69,8 +76,8 @@ function Navbar(props) {
       <span id="state" style={{ position: "relative", right: '-500px', color: 'gold', fontSize: '36px', marginRight: '100px', marginBottom: '50px'}}>Abierto: {time}</span>
     </div>
     </nav>
-    </div> // TODO: Turn enter button to red if user is registered, give info if they click another time with small text in red below
-  );       // Hover on the bottom of border under Nabar @David
+    </div>
+  );
 }
 
 export default Navbar;
