@@ -6,6 +6,12 @@ import Navbar from './Navbar';
 import { useState } from 'react';
 const client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
 
+let owners = {
+  253156717:"Diego",
+  149156587: "Alex",
+  500012077: "Team Heretics"
+}
+
 function Main() {
   const [showMenu, setMenu] = useState(false);
   //console.log(res)
@@ -54,10 +60,15 @@ function Main() {
   function parseId(data, res)
   {
     var id_person = JSON.parse(data)
-    if (id_person.data[0].id === 855203397 || id_person.data[0].id === 149156587)
+    //console.log(id_person.data[0].id)
+    var id = id_person.data[0].id
+    if (id == 253156717 || id == 149156587)
+    {
       setMenu(true)
+      document.getElementById("follower").innerHTML = `Bienvenido ${owners[id]}`;
+    } 
     else
-     get_if_in(id_person.data[0].id, res)
+     get_if_in(id_person.data[0].id, res) 
   }
   
   function get_if_in(id, res) {
