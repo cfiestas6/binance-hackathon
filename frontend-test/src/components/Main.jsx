@@ -2,19 +2,17 @@ import { id } from 'ethers/lib/utils';
 import React from 'react';
 import Menu_Owner from './Burger-menu-owner';
 import '../index.css';
-import createUser from '../scripts/db';
 import App from '../App';
+const client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
 
 function Main() {
-  var res = document.location.hash
-  var res1 = res.slice(14,44)
-  var client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
-  var res = `Bearer ${res1}`
   //console.log(res)
   //document.getElementById("demo").innerHTML = res
-
   function getName()
   {
+    var res = document.location.hash
+    var res1 = res.slice(14,44)
+    var res = `Bearer ${res1}`
       let url = "https://id.twitch.tv/oauth2/userinfo";
   
       let headers = {
@@ -29,11 +27,11 @@ function Main() {
       .then((data) =>
     {
           var name_person = JSON.parse(JSON.stringify(data))
-          getId(name_person.preferred_username)
+          getId(name_person.preferred_username, res)
     })
   }
   
-  function getId(nombre) {
+  function getId(nombre, res) {
     let url = `https://api.twitch.tv/helix/users?login=${nombre}`;
   
       let headers = {
@@ -47,21 +45,21 @@ function Main() {
       .then((res) => res.json())
       .then((data) =>
     {
-      parseId(JSON.stringify(data))
+      parseId(JSON.stringify(data), res)
     })
   }
   
-  function parseId(data)
+  function parseId(data, res)
   {
     //console.log(data)
     var id_person = JSON.parse(data)
-    if (id_person.data[0].id == 855203396)
+    if (id_person.data[0].id == 855203397)
       return <Menu_Owner isOwner={true}/>
     else
-      get_if_in(id_person.data[0].id)
+      get_if_in(id_person.data[0].id, res)
   }
   
-  function get_if_in(id) {
+  function get_if_in(id, res) {
     let url = `https://api.twitch.tv/helix/users/follows?from_id=${id}&to_id=500012077`
       let headers = {
     "Authorization": res,
@@ -72,10 +70,10 @@ function Main() {
       headers,
       })
       .then((res) => res.json())
-      .then((data) => checkSub(id, JSON.stringify(data)))
+      .then((data) => checkSub(id, JSON.stringify(data)), res)
   }
   
-  function checkSub(id, follow)
+  function checkSub(id, follow, res)
   {
       let url = `https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=500012077&user_id=${id}`
       var status_res;
@@ -109,20 +107,41 @@ function Main() {
     if (sub == 0)
     {
         // Enviar al smart contract solo una vez el address
-        document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
-        //const hash = document.getElementById("hash")
-        //createUser(id, hash)
+        document.getElementById("follower").innerHTML = "¡Enhorabuena eres elegible para participar en el sorteo!";
+        var boton = document.getElementById("submit");
+        boton.addEventListener("click", () => {
+          var hash = document.getElementById("hash").value
+          if (hash)
+          {
+            document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
+            console.log(hash)
+          }
+          else
+            document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
+      })
+        //console.log(hash)
+        //console.log(hash)
         return;
     }
 	if (follow.total > 0 && sub.data != 0)
     {
         // Enviar al smart contract dos veces al ser sub
-        document.getElementById("follower").innerHTML = "Enhorabuena estas dentro!";
-        //const hash = document.getElementById("hash")
-        //createUser(id, hash)
+        document.getElementById("follower").innerHTML = "¡Enhorabuena eres elegible para participar en el sorteo!";
+        var boton = document.getElementById("submit");
+        boton.addEventListener("click", () => {
+          var hash = document.getElementById("hash").value
+          if (hash)
+          {
+            document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
+            console.log(hash)
+          }
+          else
+            document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
+      })
         return;
     }
-}
+  }
+
   return (
     <main>
       <br />
@@ -148,10 +167,10 @@ function Main() {
         </div>
         <div class="form-group">
           <label id="name-label" for="name">Address:</label>
-          <input type="hash" name="hash" id="hash" class="form-control" placeholder="0xYourAddress" required=""/>
+          <input type="hash" name="hash" id="hash" class="form-control" placeholder="0xYourAddress" required="true"/>
         </div>
         <div class="form-group">
-          <button type="submit" id="submit" class="submit-button" onClick={getName()}>
+          <button type="button" id="submit" class="submit-button" onClick={getName()}>
             Entra al sorteo
           </button>
           </div>
@@ -162,4 +181,5 @@ function Main() {
     </main>
   )
 }
+
 export default Main;

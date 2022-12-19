@@ -7,10 +7,6 @@ function test(isOwner){
 }
 
 function Menu_Owner(props) {
-  /*var flag = 0;
-  if (props.isOwner == true)
-    flag = 1;
-  console.log(props.isOwner)*/
   const [menuOpen, setMenuOpen] = useState(false);
   const [numOfWinners, setNumOfWinners] = useState('');
   const [endingDay, setEndingDay] = useState('');

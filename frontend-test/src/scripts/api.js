@@ -1,7 +1,10 @@
 //console.log(res)
 //document.getElementById("demo").innerHTML = res
 var client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
-
+var res = document.location.hash
+var res1 = res.slice(14,44)
+var client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
+var res = `Bearer ${res1}`
 function getName()
 {
     let url = "https://id.twitch.tv/oauth2/userinfo";
