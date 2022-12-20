@@ -67,7 +67,7 @@ contract Reward is ERC721Enumerable, Ownable {
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexisten token");
         string memory baseURI = _baseURI(); 
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, "1", ".json")) : "";
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI)) : "";
     }
     function withdraw() public onlyOwner {
         address _owner = owner();

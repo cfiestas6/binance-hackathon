@@ -32,7 +32,7 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
     uint64 private immutable i_subscriptionId;
     uint32 private immutable i_callbackGasLimit;
     bytes32 private immutable i_gasLane;
-    uint32 private s_numWords;
+    uint32 private immutable i_numWords;
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
 
     /* Events */
@@ -53,18 +53,19 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         address vrfCoordinatorV2,
         bytes32 gasLane,
         uint64 subscriptionId,
-        uint32 callbackGasLimit
+        uint32 callbackGasLimit,
+        uint32 numWords
         ) VRFConsumerBaseV2(vrfCoordinatorV2){
 
         i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
         i_gasLane = gasLane;
         i_subscriptionId = subscriptionId;
         i_callbackGasLimit = callbackGasLimit;
+        i_numWords = numWords;
     }
 
-    function openRaffle(uint32 numWords) external onlyOwner {
+    function openRaffle() external onlyOwner {
         s_isOpen = true;
-        s_numWords = numWords;
         emit RaffleOpen();
     }
 
@@ -94,7 +95,7 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         i_subscriptionId,
         REQUEST_CONFIRMATIONS,
         i_callbackGasLimit,
-        s_numWords
+        i_numWords
        );
        emit GetWinner(requestId);
     }
@@ -108,7 +109,7 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         uint256[] memory randomWords
     ) internal override {
 
-        for (uint i = 0; i < s_numWords; i++) {
+        for (uint i = 0; i < i_numWords; i++) {
             uint256 indexOfWinner = randomWords[i] % s_players.length;
             address newWinner = s_players[indexOfWinner];
             if (isAlreadyWinner[newWinner]) {
