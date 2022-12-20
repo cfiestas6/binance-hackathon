@@ -42,7 +42,7 @@ contract Reward is ERC721Enumerable, Ownable {
         s_numAddressesWhitelisted += 1;
         whitelistedAddresses[msg.sender] = true;
     }
-    function mint(address winner) external payable /*onlyOwner*/ {
+    function mint(address winner) external payable onlyOwner {
         if (s_paused) {
             revert Reward__ContractPaused();
         }
@@ -54,9 +54,9 @@ contract Reward is ERC721Enumerable, Ownable {
         }
         s_tokenIds += 1;
         // Owner mints the NFT 
-        _safeMint(winner, s_tokenIds);
+        _safeMint(msg.sender, s_tokenIds);
         // Owner sends it to the winner
-        //safeTransferFrom(msg.sender, winner, s_tokenIds);
+        safeTransferFrom(msg.sender, winner, s_tokenIds);
     } 
     function setPaused(bool val) public onlyOwner {
         s_paused = val;
@@ -80,7 +80,7 @@ contract Reward is ERC721Enumerable, Ownable {
     fallback() external payable {}
 }
 
-contract MintingMetaTx {
+/*contract MintingMetaTx {
 
     using ECDSA for bytes32;
 
@@ -109,4 +109,4 @@ contract MintingMetaTx {
     function getHash(address sender, uint tokenId, address tokenContract, uint nonce) public pure returns (bytes32) {
         return keccak256(abi.encodePacked(sender, tokenId, tokenContract, nonce));
     }
-}
+}*/
