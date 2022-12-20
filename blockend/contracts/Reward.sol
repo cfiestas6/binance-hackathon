@@ -13,15 +13,11 @@ error Reward__MaxSupplyReached();
 error Reward__AlreadyWhitelisted();
 error Reward__LimitReached();
 
-interface RewardInterface {
-    function mint(address winner) external payable;
-}
-
 contract Reward is ERC721Enumerable, Ownable {
     using Strings for uint256; 
     string s_baseTokenUri;
     bool public s_paused;
-    uint256 public immutable s_maxWinners;
+    uint256 public immutable i_maxWinners;
     uint256 public s_tokenIds;
     uint8 public s_numAddressesWhitelisted;
 
@@ -29,27 +25,14 @@ contract Reward is ERC721Enumerable, Ownable {
 
     constructor (string memory baseURI, uint256 maxWinners) ERC721("Free T-shirt", "HT") {
         s_baseTokenUri = baseURI;
-        s_maxWinners = maxWinners;
+        i_maxWinners = maxWinners;
     }
 
-    function addAddressToWhitelist() public onlyOwner {
-        if (whitelistedAddresses[msg.sender]) {
-            revert Reward__AlreadyWhitelisted();
-        }
-        if (s_numAddressesWhitelisted > s_maxWinners) {
-            revert Reward__LimitReached();
-        }
-        s_numAddressesWhitelisted += 1;
-        whitelistedAddresses[msg.sender] = true;
-    }
     function mint(address winner) external payable onlyOwner {
         if (s_paused) {
             revert Reward__ContractPaused();
         }
-        if (!whitelistedAddresses[winner]){
-            revert Reward__NotWinner();
-        }
-        if (s_tokenIds >= s_maxWinners) {
+        if (s_tokenIds >= i_maxWinners) {
             revert Reward__MaxSupplyReached();
         }
         s_tokenIds += 1;
