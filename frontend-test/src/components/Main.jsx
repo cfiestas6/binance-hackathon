@@ -170,7 +170,7 @@ function Main() {
       <br />
       <br />
     <div class="texto">
-      <div class='div-form'>
+      <div class='div-form' id='div-form'>
       <form id="survey-form">
         <div class="form-group">
         <label id="twich-label" for="twich">Para poder entrar al sorteo:</label>
