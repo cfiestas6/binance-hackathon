@@ -4,12 +4,13 @@ function Menu() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div
+    <div class = 'big-burger-div'
       style={{
+        width: menuOpen ? '15%' : '3.5%',
         position: 'fixed',
-        top: '50%',
+        top: '47%',
         right: '0',
-        transform: 'translateY(-50%)'
+        transform: 'translateY(-50%)',
       }}
     >
       <button
@@ -28,10 +29,10 @@ function Menu() {
         ☰
       </button>
       {menuOpen && (
-        <div>
-          <h3>Sistema de Puntos</h3>
-          <p>Twitch Sub: +5</p>
-          <p>Extra red social: +1</p>
+        <div class='burger-div'>
+          <h3 class='burger-title'>Sistema de Puntos</h3>
+          <p class='p-burger'>Twitch Sub: +5</p>
+          <p class='p-burger'>Extra red social: +1</p>
         </div>
       )}
     </div>

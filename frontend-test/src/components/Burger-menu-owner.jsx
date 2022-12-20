@@ -30,7 +30,7 @@ function Menu_Owner(props) {
   console.log(props)
   if (props.isOwner ) { 
     return (
-      <div>
+      <div class ='owner-div'>
       <div>
         <Navbar
         numOfWinners={numOfWinners} // passed to contract
@@ -42,19 +42,20 @@ function Menu_Owner(props) {
       </div>
       <div
         style={{
+          width: menuOpen ? '15%' : '10%',
           position: 'fixed',
-          top: '30%',
+          top: '20%',
           right: '0',
           transform: 'translateY(-50%)'
         }}
       >
-        <button
+        <button class= 'owner-button'
           style={{
             backgroundColor: '#FFD700', // golden
             border: 'none',
             color: '#000000', // black
             cursor: 'pointer',
-            fontSize: '2em',
+            fontSize: '1.7em',
             outline: 'none',
             padding: '0.25em 0.5em',
             borderRadius: '0.25em',
