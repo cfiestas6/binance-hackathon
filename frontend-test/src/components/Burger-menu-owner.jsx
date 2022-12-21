@@ -2,6 +2,30 @@ import React, {useState} from 'react';
 import {Contract, providers} from 'ethers';
 import Navbar from './Navbar';
 
+function timer_set(change, selector)
+{
+  let obj = require('../timer.json')
+  if (selector == 1)
+    obj.timer.number = change
+  if (selector == 2)
+    obj.timer.day = change
+  if (selector == 3)
+    obj.timer.hour = change
+  if (selector == 4)
+    obj.timer.minute = change
+  if (selector == 5)
+    obj.timer.deploy = change
+    const json = JSON.stringify(obj);
+    fetch('http://localhost:5000/timer.json', {
+    method: 'PUT',
+    body: json,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    });
+}
+
+var json = require('../timer.json')
 function test(isOwner){ // no se usa
   Menu_Owner(isOwner)
 }
@@ -27,17 +51,17 @@ function Menu_Owner(props) {
   //  };
   //  const transactionReceipt = await contract.executeTransaction(transactionParams);
   //}
-  console.log(props)
+  //console.log(props)
   if (props.isOwner ) { 
     return (
       <div class ='owner-div'>
       <div>
         <Navbar
-        numOfWinners={numOfWinners} // passed to contract
-        day_cnt={endingDay}
-        hour_cnt={endingHour}
-        minutes_cnt={endingMinute}
-        raffleIsOpened={raffleIsOpened}
+        numOfWinners={json.timer.number} // passed to contract
+        day_cnt={json.timer.day}
+        hour_cnt={json.timer.hour}
+        minutes_cnt={json.timer.minute}
+        raffleIsOpened={json.timer.deploy}
         />
       </div>
       <div
@@ -49,36 +73,41 @@ function Menu_Owner(props) {
           transform: 'translateY(-50%)'
         }}
       >
-        <button class= 'owner-button'
-          style={{
-            backgroundColor: '#FFD700', // golden
-            border: 'none',
-            color: '#000000', // black
-            cursor: 'pointer',
-            fontSize: '1.7em',
-            outline: 'none',
-            padding: '0.25em 0.5em',
-            borderRadius: '0.25em',
-          }}
+        <button id='owner-menu'class= 'owner-button'
+          
           onClick={() => setMenuOpen(!menuOpen)}
         >
           Owner Menu
         </button>
         {menuOpen && (
-          <div>
+          <div id='params'>
             <input type='number' placeholder='NumOfWinners' value={numOfWinners} onChange={
-              (e) => setNumOfWinners(e.target.value)}/>
+            (e) => {
+              setNumOfWinners(e.target.value)
+              timer_set(e.target.value, 1)
+            }
+          }/>
             <input id='timeInput' type='number' placeholder='EndingDay' value={endingDay}
-            onChange={(e) => setEndingDay(e.target.value)}
-            />
+            onChange={(e) => {
+                setEndingDay(e.target.value)
+                timer_set(e.target.value, 2)
+              }
+            }/>
             <input id='timeInput' type='number' placeholder='EndingHour' value={endingHour}
-            onChange={(e) => setEndingHour(e.target.value)}
-            />
+            onChange={(e) => {
+                setEndingHour(e.target.value);
+                timer_set(e.target.value, 3)
+              }
+            }/>
             <input id='timeInput' type='number' placeholder='EndingMinute' value={endingMinute}
-            onChange={(e) => setEndingMinute(e.target.value)}
-            />
+            onChange={(e) => {
+                setEndingMinute(e.target.value);
+                timer_set(e.target.value, 4)
+              }
+            }/>
             <button type='submit' id='deploy' disabled={!numOfWinners || !endingDay || !endingHour || !endingMinute} onClick={() => {
               setRaffleStatus(true);
+              timer_set(true, 5)
             }}>Launch Raffle</button>
           </div>
         )}

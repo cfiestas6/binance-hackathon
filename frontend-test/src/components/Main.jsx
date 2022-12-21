@@ -2,16 +2,18 @@ import { id } from 'ethers/lib/utils';
 import React from 'react';
 import Menu_Owner from './Burger-menu-owner';
 import '../index.css';
+import '../responsive.css'
 import Navbar from './Navbar';
 import { useState } from 'react';
 const client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
+const json = require('../timer.json')
 
 let owners = {
   253156717:"Diego",
   149156587: "Alex",
   500012077: "Team Heretics"
 }
-
+  
 function Main() {
   const [showMenu, setMenu] = useState(false);
   //console.log(res)
@@ -21,7 +23,7 @@ function Main() {
     var res = document.location.hash
     var res1 = res.slice(14,44)
     var res = `Bearer ${res1}`
-      let url = "https://id.twitch.tv/oauth2/userinfo";
+    let url = "https://id.twitch.tv/oauth2/userinfo";
   
       let headers = {
     "Content-Type": "application/json",
@@ -126,13 +128,10 @@ function Main() {
           if (hash)
           {
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
-            console.log(hash)
           }
           else
             document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
       })
-        //console.log(hash)
-        //console.log(hash)
         return;
     }
 	if (follow.total > 0 && sub.data !== 0)
@@ -145,7 +144,6 @@ function Main() {
           if (hash)
           {
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
-            console.log(hash)
           }
           else
             document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
@@ -156,11 +154,12 @@ function Main() {
 
   return (
     <main>
-      {showMenu ?
-        <Menu_Owner isOwner={true} mn="tst"/>
-        :
-        <Navbar
-        />
+      {
+        showMenu ?
+          <Menu_Owner isOwner={true} mn="tst"/>
+          :
+          <Navbar day_cnt={json.timer.day} hour_cnt={json.timer.hour} minutes_cnt={json.timer.minute}
+          />
       }
       <br />
       <br />
@@ -169,9 +168,9 @@ function Main() {
       <br />
       <br />
       <br />
-    <div class="texto">
-      <div class='div-form' id='div-form'>
-      <form id="survey-form">
+    <div class="texto" id='my_text'>
+      <div class='div-form' id='form-div'>
+      <form id="survey-form" class='form-class'>
         <div class="form-group">
         <label id="twich-label" for="twich">Para poder entrar al sorteo:</label>
         <a id="twich" class="twich-button" href="https://id.twitch.tv/oauth2/authorize

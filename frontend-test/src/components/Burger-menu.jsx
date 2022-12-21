@@ -6,11 +6,12 @@ function Menu() {
   return (
     <div class = 'big-burger-div'
       style={{
-        width: menuOpen ? '15%' : '3.5%',
+        width: menuOpen ? '15%' : '4%',
         position: 'fixed',
         top: '47%',
         right: '0',
         transform: 'translateY(-50%)',
+        paddingRight: '30px'
       }}
     >
       <button
@@ -29,10 +30,10 @@ function Menu() {
         ☰
       </button>
       {menuOpen && (
-        <div class='burger-div'>
-          <h3 class='burger-title'>Sistema de Puntos</h3>
-          <p class='p-burger'>Twitch Sub: +5</p>
-          <p class='p-burger'>Extra red social: +1</p>
+        <div id='mobile-burger-div'class='burger-div'>
+          <h3 id ='mobile-burger-title' class='burger-title'>Sistema de Puntos</h3>
+          <p id='mobile-burger-p'class='p-burger'>Twitch Sub: +5</p>
+          <p id='mobile-burger-p'class='p-burger'>Twitch Follower: +1</p>
         </div>
       )}
     </div>
