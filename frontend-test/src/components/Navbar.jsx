@@ -23,9 +23,9 @@ function Navbar(props) {
     var raffleIsOpened = props.raffleIsOpened; // TO-DO
 
     var interval = setInterval(() => {
-      var now = new Date();
-      var days = day_cnt - now.getUTCDate() -1;
-      var hours = hour_cnt - now.getUTCHours(); // no -1 because Spain is UTC +1 hour
+      var now = new Date;
+      var days = day_cnt - now.getUTCDate()- 1;
+      var hours = hour_cnt - now.getUTCHours() // no -1 because Spain is UTC +1 hour
       var minutes = minutes_cnt - now.getUTCMinutes() - 1;
       var seconds = 60 - now.getSeconds();
       if (days < 0)

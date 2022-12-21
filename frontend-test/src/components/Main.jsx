@@ -6,6 +6,7 @@ import '../responsive.css'
 import Navbar from './Navbar';
 import { useState } from 'react';
 const client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
+const json = require('../timer.json')
 
 let owners = {
   253156717:"Diego",
@@ -127,13 +128,10 @@ function Main() {
           if (hash)
           {
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
-            console.log(hash)
           }
           else
             document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
       })
-        //console.log(hash)
-        //console.log(hash)
         return;
     }
 	if (follow.total > 0 && sub.data !== 0)
@@ -146,7 +144,6 @@ function Main() {
           if (hash)
           {
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
-            console.log(hash)
           }
           else
             document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
@@ -157,11 +154,12 @@ function Main() {
 
   return (
     <main>
-      {showMenu ?
-        <Menu_Owner isOwner={true} mn="tst"/>
-        :
-        <Navbar
-        />
+      {
+        showMenu ?
+          <Menu_Owner isOwner={true} mn="tst"/>
+          :
+          <Navbar day_cnt={json.timer.day} hour_cnt={json.timer.hour} minutes_cnt={json.timer.minute}
+          />
       }
       <br />
       <br />
