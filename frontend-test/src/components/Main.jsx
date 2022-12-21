@@ -2,6 +2,7 @@ import { id } from 'ethers/lib/utils';
 import React from 'react';
 import Menu_Owner from './Burger-menu-owner';
 import '../index.css';
+import '../responsive.css'
 import Navbar from './Navbar';
 import { useState } from 'react';
 const client_id = "fm7mv8gwvzqqq2rjw07pvbaymox44l"
@@ -11,7 +12,7 @@ let owners = {
   149156587: "Alex",
   500012077: "Team Heretics"
 }
-
+  
 function Main() {
   const [showMenu, setMenu] = useState(false);
   //console.log(res)
@@ -169,9 +170,9 @@ function Main() {
       <br />
       <br />
       <br />
-    <div class="texto">
-      <div class='div-form' id='div-form'>
-      <form id="survey-form">
+    <div class="texto" id='my_text'>
+      <div class='div-form' id='form-div'>
+      <form id="survey-form" class='form-class'>
         <div class="form-group">
         <label id="twich-label" for="twich">Para poder entrar al sorteo:</label>
         <a id="twich" class="twich-button" href="https://id.twitch.tv/oauth2/authorize

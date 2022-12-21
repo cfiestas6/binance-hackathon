@@ -130,7 +130,7 @@ button {
 
 /* form */
 
-#survey-form {
+.form-class {
   width: 100%;
 }
 
@@ -394,4 +394,22 @@ h2, h3, p {
 
 .owner-button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color:#FFD700;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 1.7rem;
+  outline: none;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+}
+
+
+span {
+  position: relative;
+  right: -500px;
+  color: gold;
+  font-size: 36px;
+  margin-bottom: 50px;
+  margin-right: 100px;
 }

@@ -1,0 +1,79 @@
+
+@media only screen and (max-width: 640px) {
+    #logo-twitter {
+        display: none;
+    }
+
+    #logo-youtube  {
+        display: none;
+    }
+
+    #logo-twitch {
+        display: none;
+    }
+
+    .logo-heretics  {
+        display: none;
+    }
+
+    #state {
+        right: -19%;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    #survey-form {
+        width: 100%;    
+    }
+
+ 
+
+    #form-div {
+        margin: auto;
+        width: 50vw;
+        height: 100%vh;
+        /*outline: 1px solid red;*/
+        border: 5px solid transparent;
+        border-radius: 2%;
+        box-sizing: border-box;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        position:  relative; left: -39%;
+      }
+    
+    .twich-button {
+        padding-top: 20px;
+        font-size: 0.37cm;
+    }
+
+
+    #mobile-burger-div {
+        padding-left: 0%;
+        position: relative; right: -15px;
+    }
+
+
+    #mobile-burger-title {
+        font-size: x-small;
+        text-decoration: none;
+    }
+
+    #mobile-burger-p {
+        font-size: x-small;
+    }
+
+    .burger.title {
+        font-size: 0.6cm;
+    }
+
+    #owner-menu {
+        font-size: medium;
+        position: relative; left: -29px;
+    }
+
+    #params {
+        padding-left: -50%;
+        position: relative; left: -30px;
+    }
+}

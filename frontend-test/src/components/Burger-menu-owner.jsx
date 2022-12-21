@@ -73,23 +73,14 @@ function Menu_Owner(props) {
           transform: 'translateY(-50%)'
         }}
       >
-        <button class= 'owner-button'
-          style={{
-            backgroundColor: '#FFD700', // golden
-            border: 'none',
-            color: '#000000', // black
-            cursor: 'pointer',
-            fontSize: '1.7em',
-            outline: 'none',
-            padding: '0.25em 0.5em',
-            borderRadius: '0.25em',
-          }}
+        <button id='owner-menu'class= 'owner-button'
+          
           onClick={() => setMenuOpen(!menuOpen)}
         >
           Owner Menu
         </button>
         {menuOpen && (
-          <div>
+          <div id='params'>
             <input type='number' placeholder='NumOfWinners' value={numOfWinners} onChange={
             (e) => {
               setNumOfWinners(e.target.value)

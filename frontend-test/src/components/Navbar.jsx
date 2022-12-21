@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import '../index.css';
+import '../responsive.css';
 import img from "../assets/hereticsLogo.png";
 import Menu_Owner/*, sendTransaction*/ from './Burger-menu-owner';
+
 
 
 function Navbar(props) {
@@ -12,7 +14,7 @@ function Navbar(props) {
     //console.log("veremos3")
     if(typeof props.day_cnt === 'undefined') {
       //console.log("veremos2")
-      document.getElementById("state").innerHTML = "Cerrado";
+      document.getElementById("state").innerHTML = "  Sorteo no activo";
     } else {
     //console.log("veremos")
     var day_cnt = props.day_cnt;
@@ -63,6 +65,7 @@ function Navbar(props) {
 
   return (
     <div>
+    <div class = 'div-navbar'>
     <nav class="navbar" style={{backgroundColor: '#000000'}}>
       <a id="logo-twitter" href="https://twitter.com/teamheretics" onMouseOut={() => { document.getElementById('logo-twitter').style.opacity = 1;}} onMouseOver={() => {
         document.getElementById('logo-twitter').style.opacity = 0.5;
@@ -83,10 +86,12 @@ function Navbar(props) {
         document.getElementById('link').style.opacity = 0.5;
       }}class="logo-heretics" onClick={handleClick} style={{marginTop: '9px', marginLeft: '630px', zIndex: 1}} src= {img} alt="File:Heretics logo.png" width="150" height="50"/>
       <div>
-      <span id="state" style={{ position: "relative", right: '-500px', color: 'gold', fontSize: '36px', marginRight: '100px', marginBottom: '50px'}}>Abierto: {time}</span>
+      <span id="state" >Abierto: {time}</span>
     </div>
     </nav>
     </div>
+    </div>
+    
   );
 }
 
