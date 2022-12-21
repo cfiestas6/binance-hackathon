@@ -5,7 +5,7 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+//import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 error Reward__ContractPaused();
 error Reward__NotWinner();
@@ -19,9 +19,6 @@ contract Reward is ERC721Enumerable, Ownable {
     bool public s_paused;
     uint256 public immutable i_maxWinners;
     uint256 public s_tokenIds;
-    uint8 public s_numAddressesWhitelisted;
-
-    mapping(address => bool) public whitelistedAddresses;
 
     constructor (string memory baseURI, uint256 maxWinners) ERC721("Free T-shirt", "HT") {
         s_baseTokenUri = baseURI;

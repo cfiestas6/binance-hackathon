@@ -12,22 +12,21 @@ error HereticsRaffle__NotWallet(address);
 error HereticsRaffle__NotOpen();
 
 /**
- * @title Heretics Raffle for Binance X Heretics Hackathon
+ * @title  Heretics Raffle for Binance X Heretics Hackathon
  * @author Beep Bop Beep Team
- * @notice // TO DO
- * @dev // TO DO
+ * @notice This is a raffle contract
+ * @dev    This contract uses Chainlink VRF for getting a random winner
  */
 
 contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
     using Address for address;
 
     mapping (address => bool) isPlayer;
-    mapping (address => bool) isAlreadyWinner;
 
     /* State Variables */
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
-    address payable[] private s_players;
-    address[] public s_winners; // Array of winners
+    address[] public s_players;
+    address public s_winner; 
     bool s_isOpen;
     uint64 private immutable i_subscriptionId;
     uint32 private immutable i_callbackGasLimit;
@@ -39,11 +38,11 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
     event EnterRaffle(address player);
     event RaffleOpen();
     event GetWinner(uint256 indexed requestId);
-    event WinnersSelected(address[] winners);
+    event WinnersSelected(address winner); // Could be change to return an array of winners
 
     /* Modifiers */
     modifier onlyOpen {
-        if (!s_isOpen) {                        // Check that the lottery is open
+        if (!s_isOpen) {  
             revert HereticsRaffle__NotOpen();
         }
         _;
@@ -109,17 +108,14 @@ contract HereticsRaffle is Ownable, VRFConsumerBaseV2 {
         uint256[] memory randomWords
     ) internal override {
 
-        for (uint i = 0; i < i_numWords; i++) {
-            uint256 indexOfWinner = randomWords[i] % s_players.length;
-            address newWinner = s_players[indexOfWinner];
-            if (isAlreadyWinner[newWinner]) {
-                indexOfWinner > 0 ? indexOfWinner -= 1 : indexOfWinner += 1; 
-                newWinner = s_players[indexOfWinner];
-            }
-            isAlreadyWinner[newWinner] = true;
-            s_winners.push(newWinner);
-        }
+        uint256 indexOfWinner = randomWords[0] % s_players.length;
+        address newWinner = s_players[indexOfWinner];
+        s_winner = newWinner;
+        s_players = new address[](0);
         /* Emit event from contract to whitelist the address from backend */
-        emit WinnersSelected(s_winners);
+        emit WinnersSelected(s_winner);
+    }
+    function getWinner() public view returns (address winner) {
+        return (s_winner); // Could be changed to return an array of winners
     }
 }
