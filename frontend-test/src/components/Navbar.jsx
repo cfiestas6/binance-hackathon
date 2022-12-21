@@ -13,7 +13,7 @@ function Navbar(props) {
   useEffect(() => {
     //console.log("veremos3")
     if(props.raffleIsOpened == false) {
-      //console.log("veremos2")
+      console.log("veremos2")
       document.getElementById("state").innerHTML = "Cerrado";
     } else {
     //console.log("veremos")
@@ -23,9 +23,9 @@ function Navbar(props) {
     var raffleIsOpened = props.raffleIsOpened; // TO-DO
 
     var interval = setInterval(() => {
-      var now = new Date;
-      var days = day_cnt - now.getUTCDate()- 1;
-      var hours = hour_cnt - now.getUTCHours() // no -1 because Spain is UTC +1 hour
+      var now = new Date();
+      var days = day_cnt - now.getUTCDate() -1;
+      var hours = hour_cnt - now.getUTCHours(); // no -1 because Spain is UTC +1 hour
       var minutes = minutes_cnt - now.getUTCMinutes() - 1;
       var seconds = 60 - now.getSeconds();
       if (days < 0)
@@ -34,6 +34,7 @@ function Navbar(props) {
         hours += 24;
       if (minutes < 0)
         minutes += 60;
+        raffleIsOpened = false;
       if(days.toString().length < 2)
         days= "0" + days;
       if(hours.toString().length < 2)

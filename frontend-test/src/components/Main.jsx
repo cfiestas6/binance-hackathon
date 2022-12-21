@@ -64,13 +64,17 @@ function Main() {
     var id_person = JSON.parse(data)
     //console.log(id_person.data[0].id)
     var id = id_person.data[0].id
-    if (id == 253156717 || id == 149156587)
+    if ( id == 253156717 || id == 149156587) //
     {
       setMenu(true)
       document.getElementById("follower").innerHTML = `Bienvenido ${owners[id]}`;
     } 
-    else
-     get_if_in(id_person.data[0].id, res) 
+    else{
+      if (json.timer.deploy == true)
+        get_if_in(id_person.data[0].id, res) 
+      else
+      document.getElementById("follower").innerHTML = "¡La rifa aún no está abierta!";
+    }
   }
   
   function get_if_in(id, res) {
@@ -84,11 +88,12 @@ function Main() {
       headers,
       })
       .then((res) => res.json())
-      .then((data) => checkSub(id, JSON.stringify(data)), res)
+      .then((data) => checkSub(id, JSON.stringify(data), res))
   }
   
   function checkSub(id, follow, res)
   {
+   // console.log(res)
       let url = `https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=500012077&user_id=${id}`
       var status_res;
       let headers = {
@@ -115,7 +120,7 @@ function Main() {
     var follow = JSON.parse(follow)
     if (follow.total === 0)
     {
-      document.getElementById("follower").innerHTML = "No sigues a Team Heretics en Twitch!";
+      document.getElementById("follower").innerHTML = "¡No sigues a Team Heretics en Twitch!";
       return;
     }
     if (sub === 0)
@@ -124,10 +129,24 @@ function Main() {
         document.getElementById("follower").innerHTML = "¡Enhorabuena eres elegible para participar en el sorteo!";
         var boton = document.getElementById("submit");
         boton.addEventListener("click", () => {
-          var hash = document.getElementById("hash").value
-          if (hash)
+          var wallet = document.getElementById("hash").value
+          if (wallet)
           {
+            var response = {
+              wallet,
+              is_sub: 0
+            }
+            response = JSON.stringify(response)
+            console.log(response)
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
+            fetch('http://localhost:5000', {
+              method: 'POST',
+              body: response,
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+            return;
           }
           else
             document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
@@ -136,14 +155,28 @@ function Main() {
     }
 	if (follow.total > 0 && sub.data !== 0)
     {
-        // Enviar al smart contract dos veces al ser sub
+        // Enviar al smart contract cinco veces al ser sub
         document.getElementById("follower").innerHTML = "¡Enhorabuena eres elegible para participar en el sorteo!";
         var boton = document.getElementById("submit");
         boton.addEventListener("click", () => {
-          var hash = document.getElementById("hash").value
-          if (hash)
+          var wallet = document.getElementById("hash").value
+          if (wallet)
           {
+            var response = {
+              wallet,
+              is_sub: 1
+            }
+            response = JSON.stringify(response)
+            //console.log(response)
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
+            sub = 1
+            fetch('http://localhost:5000', {
+              method: 'POST',
+              body: response,
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
           }
           else
             document.getElementById("follower").innerHTML = "¡Debes introducir tu wallet!";
