@@ -12,9 +12,9 @@ function Navbar(props) {
   //console.log(props, "nv");
   useEffect(() => {
     //console.log("veremos3")
-    if(typeof props.day_cnt === 'undefined') {
+    if(props.raffleIsOpened == false) {
       //console.log("veremos2")
-      document.getElementById("state").innerHTML = "  Sorteo no activo";
+      document.getElementById("state").innerHTML = "Cerrado";
     } else {
     //console.log("veremos")
     var day_cnt = props.day_cnt;
@@ -51,10 +51,20 @@ function Navbar(props) {
       //console.log(minutes_cnt)
       //console.log(now.getUTCMinutes())
       //console.log(raffleIsOpened)
-      if ((day_cnt <= now.getDate() && hour_cnt <= (now.getUTCHours() +1) && minutes_cnt <= now.getUTCMinutes() && seconds === 1) || raffleIsOpened == false) {
+      if (days <= now.getDate() && hours <= (now.getUTCHours() +1) && minutes <= now.getUTCMinutes() && seconds == 1){
         document.getElementById("state").innerHTML = "Cerrado";
+        const obj = require('../timer.json')
+        obj.timer.deploy = false;
+        const json = JSON.stringify(obj);
+        fetch('http://localhost:5000/timer.json', {
+          method: 'PUT',
+          body: json,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          });
         /*sendTransaction();*/
-      }
+        }
     }, 1000);
   }
 }, [props.day_cnt, props.hour_cnt, props.minutes_cnt, props.raffleIsOpened]);
