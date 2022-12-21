@@ -21,7 +21,7 @@ function Main() {
     var res = document.location.hash
     var res1 = res.slice(14,44)
     var res = `Bearer ${res1}`
-      let url = "https://id.twitch.tv/oauth2/userinfo";
+    let url = "https://id.twitch.tv/oauth2/userinfo";
   
       let headers = {
     "Content-Type": "application/json",

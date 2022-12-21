@@ -7,14 +7,14 @@ import Menu_Owner/*, sendTransaction*/ from './Burger-menu-owner';
 function Navbar(props) {
 
   const [time, setTime] = useState(null);
-  console.log(props, "nv");
+  //console.log(props, "nv");
   useEffect(() => {
-    console.log("veremos3")
+    //console.log("veremos3")
     if(typeof props.day_cnt === 'undefined') {
-      console.log("veremos2")
+      //console.log("veremos2")
       document.getElementById("state").innerHTML = "Cerrado";
     } else {
-    console.log("veremos")
+    //console.log("veremos")
     var day_cnt = props.day_cnt;
     var hour_cnt = props.hour_cnt;
     var minutes_cnt = props.minutes_cnt;
@@ -32,7 +32,6 @@ function Navbar(props) {
         hours += 24;
       if (minutes < 0)
         minutes += 60;
-        raffleIsOpened = false;
       if(days.toString().length < 2)
         days= "0" + days;
       if(hours.toString().length < 2)
@@ -42,14 +41,14 @@ function Navbar(props) {
       if (seconds.toString().length < 2)
         seconds = "0" + seconds;
       setTime(`${days}:${hours}:${minutes}:${seconds}`);
-      console.log(day_cnt)
-      console.log(now.getUTCDate())
-      console.log(hour_cnt)
-      console.log(now.getUTCHours())
-      console.log(now.getUTCHours() + 1)
-      console.log(minutes_cnt)
-      console.log(now.getUTCMinutes())
-      console.log(raffleIsOpened)
+      //console.log(day_cnt)
+      //console.log(now.getUTCDate())
+      //console.log(hour_cnt)
+      //console.log(now.getUTCHours())
+      //console.log(now.getUTCHours() + 1)
+      //console.log(minutes_cnt)
+      //console.log(now.getUTCMinutes())
+      //console.log(raffleIsOpened)
       if ((day_cnt <= now.getDate() && hour_cnt <= (now.getUTCHours() +1) && minutes_cnt <= now.getUTCMinutes() && seconds === 1) || raffleIsOpened == false) {
         document.getElementById("state").innerHTML = "Cerrado";
         /*sendTransaction();*/

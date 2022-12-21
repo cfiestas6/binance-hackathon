@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "cross-env": "^7.0.3",
     "ethers": "^5.7.2",
+    "fs": "^0.0.1-security",
     "mongoose": "^6.8.0",
     "moongose": "^1.0.0",
     "react": "^18.1.0",
@@ -38,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv-webpack": "^8.0.1"
   }
 }
