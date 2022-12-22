@@ -64,7 +64,7 @@ function Main() {
     var id_person = JSON.parse(data)
     //console.log(id_person.data[0].id)
     var id = id_person.data[0].id
-    if ( id == 253156717 || id == 149156587) //
+    if ( id == 149156587) // id == 253156717 ||
     {
       setMenu(true)
       document.getElementById("follower").innerHTML = `Bienvenido ${owners[id]}`;
@@ -134,14 +134,12 @@ function Main() {
           {
             var response = {
               wallet,
-              is_sub: 0
+              subscriber: 0
             }
-            response = JSON.stringify(response)
-            console.log(response)
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
-            fetch('http://localhost:5000', {
+            fetch('http://localhost:5000/', {
               method: 'POST',
-              body: response,
+              body: JSON.stringify(response),
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -164,15 +162,13 @@ function Main() {
           {
             var response = {
               wallet,
-              is_sub: 1
+              subscriber: 1
             }
-            response = JSON.stringify(response)
             //console.log(response)
             document.getElementById("follower").innerHTML = "Ya estás dentro del sorteo ¡Mucha suerte!";
-            sub = 1
-            fetch('http://localhost:5000', {
+            fetch('http://localhost:5000/', {
               method: 'POST',
-              body: response,
+              body: JSON.stringify(response),
               headers: {
                 'Content-Type': 'application/json',
               },
