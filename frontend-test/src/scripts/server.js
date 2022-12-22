@@ -1,8 +1,14 @@
 var http = require('http'); 
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const ethers = require("ethers");
+const { rewardAddress, raffleAddress, raffleABI, rewardABI } = require("./constants.js");
+require("dotenv").config();
 
-var server = http.createServer(function (req, res) {
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const QUICKNODE_RPC_URL = process.env.QUICKNODE_RPC_URL;
+
+var server = http.createServer(async function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
@@ -28,6 +34,15 @@ var server = http.createServer(function (req, res) {
     }
     if (req.method === 'POST'){
         // Poner la conexion con el contrato
+        const provider = new ethers.providers.JsonRpcProvider(QUICKNODE_RPC_URL);
+        const signer = new ethers.Wallet(PRIVATE_KEY, provider);
+        const raffleContract = new ethers.Contract(raffleAddress, raffleABI, signer);
+        if (subscriber) {
+            const tx1 = await raffleContract.enterToRaffle(/* ADDRESS */);
+            await tx1.wait();
+        }
+        const tx = await raffleContract.enterToRaffle(/* ADDRESS */);
+        await tx.wait();
         }
 });
 
