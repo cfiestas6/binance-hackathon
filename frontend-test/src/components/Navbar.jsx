@@ -11,7 +11,7 @@ function Navbar(props) {
   const [time, setTime] = useState(null);
   //console.log(props, "nv");
   useEffect(() => {
-    console.log(props.raffleIsOpened)
+    //console.log(props.raffleIsOpened)
     //console.log("veremos3")
     if(props.raffleIsOpened == false) {
       //console.log("veremos2")
@@ -72,19 +72,19 @@ function Navbar(props) {
           headers: {
             'Content-Type': 'application/json',
           },
-          });
-        }
+        });
         fetch('http://localhost:5000/end-raffle', {
           method: 'GET',
           body: json,
           headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
           },
         })
         .then((res) => res.json())
         .then((data) => {
           const winner = data.winner;
         })
+        }
     }, 1000);
   }
 }, [props.day_cnt, props.hour_cnt, props.minutes_cnt, props.raffleIsOpened]);

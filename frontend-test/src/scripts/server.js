@@ -15,10 +15,10 @@ var server = http.createServer(async function (req, res) {
     if (req.url == '/timer.json' && req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         var json = require('../timer.json')
-        res.write(JSON.stringify(json));  
+        res.write(json);  
         res.end();  
     }
-    if (req.url == '/timer.json'){
+    if (req.url == '/timer.json' && (req.method === 'OPTIONS' || req.method === 'PUT')){
         req.on('data', function (chunk) {
             chunk = chunk.toString()
             var json = JSON.stringify(chunk);
@@ -75,9 +75,10 @@ var server = http.createServer(async function (req, res) {
         const mintTx = await rewardContract.mint(winner);
         await mintTx.wait();
         // enviar respuesta con el winner.
-        res.end({
+        res.write({
             winner: winner
         });
+        res.end()
     }
 });
 

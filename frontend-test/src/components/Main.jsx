@@ -187,7 +187,7 @@ function Main() {
         showMenu ?
           <Menu_Owner isOwner={true} mn="tst"/>
           :
-          <Navbar day_cnt={json.timer.day} hour_cnt={json.timer.hour} minutes_cnt={json.timer.minute}
+          <Navbar day_cnt={json.timer.day} hour_cnt={json.timer.hour} minutes_cnt={json.timer.minute} raffleIsOpened={json.timer.deploy}
           />
       }
       <br />
