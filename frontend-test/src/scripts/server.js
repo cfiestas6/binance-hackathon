@@ -2,7 +2,7 @@ var http = require('http');
 const fs = require('fs');
 const { parse } = require('querystring');
 const ethers = require("ethers");
-//const { rewardAddress, raffleAddress, raffleABI, rewardABI } = require("./constants.js");
+const { rewardAddress, raffleAddress, raffleABI, rewardABI } = require("./constants.js");
 require("dotenv").config();
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
@@ -53,6 +53,32 @@ var server = http.createServer(async function (req, res) {
         }) 
         res.end(); 
         }
+    if (req.url === '/open-raffle' && (req.method === 'OPTIONS' || req.method === 'POST')) {
+        const provider = new ethers.providers.JsonRpcProvider(QUICKNODE_RPC_URL);
+        const signer = new ethers.Wallet(PRIVATE_KEY, provider);
+        const raffleContract = new ethers.Contract(raffleAddress, raffleABI, signer);
+
+        const tx = await raffleContract.openRaffle();
+        await tx.wait();
+        res.end();
+    }
+    if (req.url === '/end-raffle' && req.method === 'GET') {
+        const provider = new ethers.providers.JsonRpcProvider(QUICKNODE_RPC_URL);
+        const signer = new ethers.Wallet(PRIVATE_KEY, provider);
+        const raffleContractWrite = new ethers.Contract(raffleAddress, raffleABI, signer);
+        const rewardContract = new ethers.Contract(rewardAddress, rewardABI, signer);
+        const raffleContractRead = new ethers.Contract(raffleAddress, raffleABI, provider);
+        const tx = await raffleContractWrite.endRaffle()
+        await tx.wait(); 
+        const winner = await raffleContractRead.getWinner();
+        await winner.wait();
+        const mintTx = await rewardContract.mint(winner);
+        await mintTx.wait();
+        // enviar respuesta con el winner.
+        res.end({
+            winner: winner
+        });
+    }
 });
 
 server.listen(5000); 

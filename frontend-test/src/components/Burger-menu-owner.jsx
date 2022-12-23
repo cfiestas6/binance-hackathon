@@ -13,8 +13,12 @@ function timer_set(change, selector)
     obj.timer.hour = change
   if (selector == 4)
     obj.timer.minute = change
-  if (selector == 5)
+  if (selector == 5) {
     obj.timer.deploy = change
+    fetch('http://localhost:500/open-raffle', {
+      method: 'POST'
+    });
+  }
     const json = JSON.stringify(obj);
     fetch('http://localhost:5000/timer.json', {
     method: 'PUT',

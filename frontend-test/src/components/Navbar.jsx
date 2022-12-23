@@ -73,8 +73,18 @@ function Navbar(props) {
             'Content-Type': 'application/json',
           },
           });
-        /*sendTransaction();*/
         }
+        fetch('http://localhost:5000/end-raffle', {
+          method: 'GET',
+          body: json,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          const winner = data.winner;
+        })
     }, 1000);
   }
 }, [props.day_cnt, props.hour_cnt, props.minutes_cnt, props.raffleIsOpened]);
