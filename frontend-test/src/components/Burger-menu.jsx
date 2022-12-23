@@ -8,17 +8,17 @@ function Menu() {
       style={{
         width: menuOpen ? '15%' : '4%',
         position: 'fixed',
-        top: '47%',
+        top: '50%',
         right: '0',
         transform: 'translateY(-50%)',
         paddingRight: '30px'
       }}
     >
-      <button
+      <button id='burger-div'
         style={{
-          backgroundColor: '#FFD700',  // golden
+          //backgroundColor: '#FFD700',  // golden
           border: 'none',
-          color: '#000000',  // black
+          color: 'white',  // black
           cursor: 'pointer',
           fontSize: '2em',
           outline: 'none',

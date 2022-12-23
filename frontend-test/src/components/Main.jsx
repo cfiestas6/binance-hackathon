@@ -15,7 +15,7 @@ let owners = {
 }
   
 function Main() {
-  const [showMenu, setMenu] = useState(false);
+  const [showMenu, setMenu] = useState(true);
   //console.log(res)
   //document.getElementById("demo").innerHTML = res
   function getName()

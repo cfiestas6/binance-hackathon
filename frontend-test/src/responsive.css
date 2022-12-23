@@ -76,4 +76,42 @@
         padding-left: -50%;
         position: relative; left: -30px;
     }
-}
+
+    #deploy {
+        font-size: x-small !important;
+        width: 150% !important;
+        text-indent: -190%;
+    }
+
+    #number {
+        width: 150% !important;
+
+    }
+
+    #params {
+        position: relative; left: -60% !important;
+    }
+
+    .big-burger-div {
+        top: 65% !important;
+        left: 85% !important;
+    }
+
+    #div-menu {
+        top: 25% !important;
+    }
+
+    #owner-menu {
+        width: 160% !important;
+        height: 50% !important;
+        font-size: x-small !important;
+        position: relative; left: -130% !important;
+        margin-bottom: 2%;
+    }
+
+    #burger-div {
+        position: relative; right: 70% !important;
+        font-size: small !important;
+    }
+
+}   

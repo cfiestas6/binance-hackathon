@@ -64,11 +64,11 @@ function Menu_Owner(props) {
         raffleIsOpened={json.timer.deploy}
         />
       </div>
-      <div
+      <div id='div-menu'
         style={{
           width: menuOpen ? '15%' : '10%',
           position: 'fixed',
-          top: '20%',
+          top: '23%',
           right: '0',
           transform: 'translateY(-50%)'
         }}
@@ -81,25 +81,25 @@ function Menu_Owner(props) {
         </button>
         {menuOpen && (
           <div id='params'>
-            <input type='number' placeholder='NumOfWinners' value={numOfWinners} onChange={
+            <input id="number"type='number' placeholder='NumOfWinners' value={numOfWinners} onChange={
             (e) => {
               setNumOfWinners(e.target.value)
               timer_set(e.target.value, 1)
             }
           }/>
-            <input id='timeInput' type='number' placeholder='EndingDay' value={endingDay}
+            <input id='number' type='number' placeholder='EndingDay' value={endingDay}
             onChange={(e) => {
                 setEndingDay(e.target.value)
                 timer_set(e.target.value, 2)
               }
             }/>
-            <input id='timeInput' type='number' placeholder='EndingHour' value={endingHour}
+            <input id='number' type='number' placeholder='EndingHour' value={endingHour}
             onChange={(e) => {
                 setEndingHour(e.target.value);
                 timer_set(e.target.value, 3)
               }
             }/>
-            <input id='timeInput' type='number' placeholder='EndingMinute' value={endingMinute}
+            <input id='number' type='number' placeholder='EndingMinute' value={endingMinute}
             onChange={(e) => {
                 setEndingMinute(e.target.value);
                 timer_set(e.target.value, 4)
