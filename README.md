@@ -6,6 +6,6 @@ El proyecto consiste de un sistema de smart contracts, unidos a una interfaz web
 
 Una aplicación flexible, segura y escalable.
 
-Aquí se pudede acceder al link de la presentación: https://docs.google.com/presentation/d/1JO3F2Ro_Dz2eDy5RWRm1WIrCKdBCatjtB3vpmhSG15c/edit?usp=sharing
+Aquí se puede acceder al link de la presentación: https://docs.google.com/presentation/d/1JO3F2Ro_Dz2eDy5RWRm1WIrCKdBCatjtB3vpmhSG15c/edit?usp=sharing
 
 
