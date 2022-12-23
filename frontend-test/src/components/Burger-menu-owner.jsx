@@ -52,7 +52,7 @@ function Menu_Owner(props) {
   //  const transactionReceipt = await contract.executeTransaction(transactionParams);
   //}
   //console.log(props)
-  if (props.isOwner ) { 
+  if (props.isOwner) { 
     return (
       <div class ='owner-div'>
       <div>

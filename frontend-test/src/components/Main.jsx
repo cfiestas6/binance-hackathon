@@ -64,7 +64,7 @@ function Main() {
     var id_person = JSON.parse(data)
     //console.log(id_person.data[0].id)
     var id = id_person.data[0].id
-    if ( id == 149156587) // id == 253156717 ||
+    if ( id == 253156717 || id ==  149156587) // 
     {
       setMenu(true)
       document.getElementById("follower").innerHTML = `Bienvenido ${owners[id]}`;
@@ -187,7 +187,7 @@ function Main() {
         showMenu ?
           <Menu_Owner isOwner={true} mn="tst"/>
           :
-          <Navbar day_cnt={json.timer.day} hour_cnt={json.timer.hour} minutes_cnt={json.timer.minute} raffleIsOpened={json.timer.deploy}
+          <Navbar day_cnt={json.timer.day} hour_cnt={json.timer.hour} minutes_cnt={json.timer.minute}
           />
       }
       <br />

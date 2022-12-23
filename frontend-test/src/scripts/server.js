@@ -18,7 +18,7 @@ var server = http.createServer(async function (req, res) {
         res.write(JSON.stringify(json));  
         res.end();  
     }
-    if (req.url == '/timer.json' && req.method === 'PUT'){
+    if (req.url == '/timer.json'){
         req.on('data', function (chunk) {
             chunk = chunk.toString()
             var json = JSON.stringify(chunk);

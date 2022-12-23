@@ -11,9 +11,10 @@ function Navbar(props) {
   const [time, setTime] = useState(null);
   //console.log(props, "nv");
   useEffect(() => {
+    console.log(props.raffleIsOpened)
     //console.log("veremos3")
     if(props.raffleIsOpened == false) {
-      console.log("veremos2")
+      //console.log("veremos2")
       document.getElementById("state").innerHTML = "Cerrado";
     } else {
     //console.log("veremos")
