@@ -75,14 +75,11 @@ function Navbar(props) {
         });
         fetch('http://localhost:5000/end-raffle', {
           method: 'GET',
-          body: json,
-          headers: {
-          'Content-Type': 'application/json',
-          },
         })
         .then((res) => res.json())
         .then((data) => {
           const winner = data.winner;
+          console.log(winner)
         })
         }
     }, 1000);

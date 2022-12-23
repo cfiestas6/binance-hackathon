@@ -45,15 +45,26 @@ var server = http.createServer(async function (req, res) {
             const signer = new ethers.Wallet(PRIVATE_KEY, provider);
             const raffleContract = new ethers.Contract(raffleAddress, raffleABI, signer);
             if (subscriber == 1) {
+                try{
                 const tx1 = await raffleContract.enterToRaffle(address);
                 await tx1.wait();
+                }
+                catch{
+                    console.log("error")
+                }
             }
-            const tx = await raffleContract.enterToRaffle(address);
-            await tx.wait();
+            try{
+                const tx = await raffleContract.enterToRaffle(address);
+                await tx.wait();
+            }
+            catch{
+                console.log("error")
+            }
         }) 
         res.end(); 
         }
-    if (req.url === '/open-raffle' && (req.method === 'OPTIONS' || req.method === 'POST')) {
+    if (req.url === '/open-raffle' && req.method === 'GET') {
+        console.log("Rifa Abierta")
         const provider = new ethers.providers.JsonRpcProvider(QUICKNODE_RPC_URL);
         const signer = new ethers.Wallet(PRIVATE_KEY, provider);
         const raffleContract = new ethers.Contract(raffleAddress, raffleABI, signer);
@@ -63,22 +74,20 @@ var server = http.createServer(async function (req, res) {
         res.end();
     }
     if (req.url === '/end-raffle' && req.method === 'GET') {
+        console.log("Rifa Cerrada")
         const provider = new ethers.providers.JsonRpcProvider(QUICKNODE_RPC_URL);
         const signer = new ethers.Wallet(PRIVATE_KEY, provider);
         const raffleContractWrite = new ethers.Contract(raffleAddress, raffleABI, signer);
         const rewardContract = new ethers.Contract(rewardAddress, rewardABI, signer);
         const raffleContractRead = new ethers.Contract(raffleAddress, raffleABI, provider);
-        const tx = await raffleContractWrite.endRaffle()
+        const tx = await raffleContractWrite.endRaffle({gasLimit: 100000});
         await tx.wait(); 
-        const winner = await raffleContractRead.getWinner();
-        await winner.wait();
-        const mintTx = await rewardContract.mint(winner);
-        await mintTx.wait();
+        const winner = await raffleContractRead.getWinner({gasLimit: 100000});
+        console.log(winner);
+        const mintTx = await rewardContract.mint(winner, {gasLimit: 2500000 , value: ethers.utils.parseEther("0.0001")});
         // enviar respuesta con el winner.
-        res.write({
-            winner: winner
-        });
-        res.end()
+        res.write(winner);
+        res.end();
     }
 });
 

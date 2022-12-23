@@ -64,7 +64,7 @@ function Main() {
     var id_person = JSON.parse(data)
     //console.log(id_person.data[0].id)
     var id = id_person.data[0].id
-    if ( id == 253156717 || id ==  149156587) // 
+    if (id == 253156717 || id == 500012077) //    id ==  149156587 || 
     {
       setMenu(true)
       document.getElementById("follower").innerHTML = `Bienvenido ${owners[id]}`;

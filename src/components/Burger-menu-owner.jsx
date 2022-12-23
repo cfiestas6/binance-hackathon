@@ -14,13 +14,14 @@ function timer_set(change, selector)
   if (selector == 4)
     obj.timer.minute = change
   if (selector == 5) {
+    console.log("abriendo raffle")
     obj.timer.deploy = change
-    fetch('http://localhost:500/open-raffle', {
-      method: 'POST'
+    fetch('http://localhost:5000/open-raffle', {
+        method: 'GET'
     });
   }
-    const json = JSON.stringify(obj);
-    fetch('http://localhost:5000/timer.json', {
+  const json = JSON.stringify(obj);
+  fetch('http://localhost:5000/timer.json', {
     method: 'PUT',
     body: json,
     headers: {
