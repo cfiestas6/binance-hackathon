@@ -24,17 +24,24 @@ function Navbar(props) {
 
     var interval = setInterval(() => {
       var now = new Date();
-      var days = day_cnt - now.getUTCDate() -1;
-      var hours = hour_cnt - now.getUTCHours(); // no -1 because Spain is UTC +1 hour
+      var days;
+      var hours;
       var minutes = minutes_cnt - now.getUTCMinutes() - 1;
       var seconds = 60 - now.getSeconds();
+      if ((hour_cnt < now.getHours) || (hour_cnt == now.getHours && minutes_cnt < now.getMinutes))
+        days = day_cnt - now.getDate() -1;
+      else
+        days = day_cnt - now.getDate();
+      if (minutes_cnt < now.getMinutes)
+        hours = hour_cnt - now.getHours() -1;
+      else
+        hours = hour_cnt - now.getHours();
       if (days < 0)
         days = 0;
       if (hours < 0)
         hours += 24;
       if (minutes < 0)
         minutes += 60;
-        raffleIsOpened = false;
       if(days.toString().length < 2)
         days= "0" + days;
       if(hours.toString().length < 2)
@@ -54,6 +61,7 @@ function Navbar(props) {
       //console.log(raffleIsOpened)
       if (days <= now.getDate() && hours <= (now.getUTCHours() +1) && minutes <= now.getUTCMinutes() && seconds == 1){
         document.getElementById("state").innerHTML = "Cerrado";
+        raffleIsOpened = false;
         const obj = require('../timer.json')
         obj.timer.deploy = false;
         const json = JSON.stringify(obj);
